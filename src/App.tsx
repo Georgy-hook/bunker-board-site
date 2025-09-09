@@ -1,7 +1,7 @@
 import { Button } from "./components/ui/button";
 import { Card, CardContent } from "./components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
-import heroImage from "figma:asset/af3b0ac35568f0c21ec86e6301202642d53c9127.png";
+import bunkerLogo from "figma:asset/af3b0ac35568f0c21ec86e6301202642d53c9127.png";
 import characterImage2 from "figma:asset/01dd0ce9e0b60769d8e2373f6148055f34ea473a.png";
 import iosLogo from "figma:asset/c2ee98b3b52bcc7fc4a05bff8e8d653ad06349b6.png";
 import houseIcon from "figma:asset/114ebae2afe3a8a82f1ffeca9290fb1759e0ab3a.png";
@@ -40,10 +40,10 @@ export default function App() {
         @keyframes shadowPulse{0%,100%{box-shadow:0 10px 28px rgba(0,0,0,.18)}50%{box-shadow:0 20px 48px rgba(0,0,0,.28)}}
         .card-animated{animation:cardGlow 6s ease-in-out infinite}
         @keyframes cardGlow{0%,100%{box-shadow:0 24px 70px rgba(0,0,0,.15)}50%{box-shadow:0 36px 110px rgba(0,0,0,.25)}}
-        @keyframes bounceSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-        .bounce-soft{animation:bounceSoft 1.6s ease-in-out infinite; will-change:transform}
+        @keyframes bounceSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+        .bounce-soft{animation:bounceSoft 1.6s ease-in-out infinite; will-change:transform; transform:translateZ(0)}
         .bounce-soft.delay-1{animation-delay:.6s}
-        .big-sticker{width:6rem;height:6rem}
+        .big-sticker{width:clamp(4rem,22vw,6rem);height:clamp(4rem,22vw,6rem)}
         @media(min-width:1024px){.big-sticker{width:7rem;height:7rem}}
       `}</style>
 
@@ -101,30 +101,42 @@ export default function App() {
               <Card className="bg-white/95 backdrop-blur-sm rounded-3xl border-0 overflow-visible card-animated">
                 <CardContent className="p-8 lg:p-12">
                   <div className="text-center mb-12">
-                    <div className="relative mb-8 pt-16 pb-12 px-12 overflow-visible">
+                    <div className="relative mb-8 pt-28 sm:pt-20 lg:pt-16 pb-24 lg:pb-28 px-6 sm:px-12 overflow-visible min-h-[300px] sm:min-h-[360px] lg:min-h-[420px]">
                       <img
-                        src={heroImage}
-                        alt="Bunker Board Logo"
-                        className="mx-auto w-full max-w-lg h-auto drop-shadow-2xl"
+                        src={bunkerLogo}
+                        alt="Bunker Logo"
+                        className="relative z-[1] mx-auto w-full max-w-lg h-auto drop-shadow-2xl"
                       />
-                      <div className="absolute top-4 left-4 animate-bounce">
+                      <div
+                        className="absolute left-2 sm:left-4 z-[2] bounce-soft pointer-events-none"
+                        style={{ top: "clamp(1rem, 6vw, 2.5rem)" }}
+                      >
                         <img
                           src={dogIcon}
                           alt="Character 1"
                           className="big-sticker object-contain rotate-12"
                         />
                       </div>
-                      <div className="absolute top-4 right-4 animate-bounce delay-1">
+                      <div
+                        className="absolute right-2 sm:right-4 z-[2] bounce-soft delay-1 pointer-events-none"
+                        style={{ top: "clamp(1rem, 6vw, 2.5rem)" }}
+                      >
                         <img
                           src={characterImage2}
                           alt="Character 2"
                           className="big-sticker object-contain -rotate-12"
                         />
                       </div>
-                      <div className="absolute bottom-2 left-1/4 animate-bounce">
+                      <div
+                        className="absolute left-1/4 z-[2] bounce-soft pointer-events-none"
+                        style={{ bottom: "clamp(0.5rem, 2.2vw, 1.25rem)" }}
+                      >
                         <img src={fishIcon} alt="Radiation" className="w-10 h-10 object-contain" />
                       </div>
-                      <div className="absolute bottom-2 right-1/4 animate-bounce">
+                      <div
+                        className="absolute right-1/4 z-[2] bounce-soft pointer-events-none"
+                        style={{ bottom: "clamp(0.5rem, 2.2vw, 1.25rem)" }}
+                      >
                         <img src={backpackIcon} alt="Backpack" className="w-10 h-10 object-contain" />
                       </div>
                     </div>

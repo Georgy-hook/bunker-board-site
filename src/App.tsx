@@ -1,9 +1,7 @@
 import { Button } from "./components/ui/button";
 import { Card, CardContent } from "./components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
-import { ImageWithFallback } from "./components/figma/ImageWithFallback";
 import heroImage from "figma:asset/af3b0ac35568f0c21ec86e6301202642d53c9127.png";
-import characterImage1 from "figma:asset/a994a07bf07c7a6638f6d7f3cf7eeeab3e9b411b.png";
 import characterImage2 from "figma:asset/01dd0ce9e0b60769d8e2373f6148055f34ea473a.png";
 import iosLogo from "figma:asset/c2ee98b3b52bcc7fc4a05bff8e8d653ad06349b6.png";
 import houseIcon from "figma:asset/114ebae2afe3a8a82f1ffeca9290fb1759e0ab3a.png";
@@ -35,6 +33,18 @@ export default function App() {
         .legal-content p{margin-top:1rem;margin-bottom:1rem;line-height:1.75}
         .legal-content ul{padding-left:1.25rem;margin-top:0.75rem;margin-bottom:0.75rem}
         .legal-content li{margin-top:0.5rem;margin-bottom:0.5rem}
+        .btn-animated{transition:transform .25s ease, box-shadow .25s ease; will-change:transform, box-shadow; animation:shadowPulse 3.2s ease-in-out infinite}
+        .btn-animated:hover{transform:translateY(-2px) scale(1.03)}
+        .btn-animated:active{transform:translateY(0) scale(.98)}
+        .btn-animated:focus-visible{outline:0; box-shadow:0 0 0 .35rem rgba(255,255,255,.35)}
+        @keyframes shadowPulse{0%,100%{box-shadow:0 10px 28px rgba(0,0,0,.18)}50%{box-shadow:0 20px 48px rgba(0,0,0,.28)}}
+        .card-animated{animation:cardGlow 6s ease-in-out infinite}
+        @keyframes cardGlow{0%,100%{box-shadow:0 24px 70px rgba(0,0,0,.15)}50%{box-shadow:0 36px 110px rgba(0,0,0,.25)}}
+        @keyframes bounceSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        .bounce-soft{animation:bounceSoft 1.6s ease-in-out infinite; will-change:transform}
+        .bounce-soft.delay-1{animation-delay:.6s}
+        .big-sticker{width:6rem;height:6rem}
+        @media(min-width:1024px){.big-sticker{width:7rem;height:7rem}}
       `}</style>
 
       <header className="p-4 lg:p-6">
@@ -50,7 +60,7 @@ export default function App() {
           <Button
             asChild
             size="lg"
-            className="bg-black text-white hover:bg-gray-800 shadow-lg transform hover:scale-105 transition-all duration-200 flex-shrink-0"
+            className="bg-black text-white hover:bg-gray-800 shadow-lg hover:shadow-2xl btn-animated flex-shrink-0"
           >
             <a
               href="https://apps.apple.com/app/id6749825722"
@@ -68,53 +78,53 @@ export default function App() {
       <main className="p-4 lg:p-6">
         <div className="max-w-6xl mx-auto">
           <Tabs defaultValue="description" className="w-full">
-            <TabsList className="grid h-auto w-full grid-cols-2 lg:grid-cols-4 mb-8 bg-white/90 backdrop-blur-sm">
-              <TabsTrigger value="description" className="text-sm lg:text-base gap-2">
+            <TabsList className="grid h-auto w-full grid-cols-2 lg:grid-cols-4 mb-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-md">
+              <TabsTrigger value="description" className="text-sm lg:text-base gap-2 transition-all hover:shadow-md hover:-translate-y-0.5">
                 <img src={descriptionIcon} alt="Description" className="w-5 h-5 object-contain" />
                 Description
               </TabsTrigger>
-              <TabsTrigger value="privacy" className="text-sm lg:text-base gap-2">
+              <TabsTrigger value="privacy" className="text-sm lg:text-base gap-2 transition-all hover:shadow-md hover:-translate-y-0.5">
                 <img src={privacyIcon} alt="Privacy Policy" className="w-5 h-5 object-contain" />
                 Privacy Policy
               </TabsTrigger>
-              <TabsTrigger value="terms" className="text-sm lg:text-base gap-2">
+              <TabsTrigger value="terms" className="text-sm lg:text-base gap-2 transition-all hover:shadow-md hover:-translate-y-0.5">
                 <img src={termsIcon} alt="Terms of Use" className="w-5 h-5 object-contain" />
                 Terms of Use
               </TabsTrigger>
-              <TabsTrigger value="support" className="text-sm lg:text-base gap-2">
+              <TabsTrigger value="support" className="text-sm lg:text-base gap-2 transition-all hover:shadow-md hover:-translate-y-0.5">
                 <img src={supportIcon} alt="Support" className="w-5 h-5 object-contain" />
                 Support
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="description">
-              <Card className="bg-white/95 backdrop-blur-sm shadow-xl rounded-3xl border-0 overflow-hidden">
+              <Card className="bg-white/95 backdrop-blur-sm rounded-3xl border-0 overflow-visible card-animated">
                 <CardContent className="p-8 lg:p-12">
                   <div className="text-center mb-12">
-                    <div className="relative mb-8">
+                    <div className="relative mb-8 pt-16 pb-12 px-12 overflow-visible">
                       <img
                         src={heroImage}
                         alt="Bunker Board Logo"
                         className="mx-auto w-full max-w-lg h-auto drop-shadow-2xl"
                       />
-                      <div className="absolute -top-8 -left-8 w-16 h-16 transform rotate-12 animate-bounce">
+                      <div className="absolute top-4 left-4 animate-bounce">
                         <img
                           src={dogIcon}
                           alt="Character 1"
-                          className="w-full h-full object-contain"
+                          className="big-sticker object-contain rotate-12"
                         />
                       </div>
-                      <div className="absolute -top-8 -right-8 w-16 h-16 transform -rotate-12 animate-bounce delay-1000">
+                      <div className="absolute top-4 right-4 animate-bounce delay-1">
                         <img
                           src={characterImage2}
                           alt="Character 2"
-                          className="w-full h-full object-contain"
+                          className="big-sticker object-contain -rotate-12"
                         />
                       </div>
-                      <div className="absolute -bottom-4 left-1/4 animate-bounce delay-500">
+                      <div className="absolute bottom-2 left-1/4 animate-bounce">
                         <img src={fishIcon} alt="Radiation" className="w-10 h-10 object-contain" />
                       </div>
-                      <div className="absolute -bottom-4 right-1/4 animate-bounce delay-700">
+                      <div className="absolute bottom-2 right-1/4 animate-bounce">
                         <img src={backpackIcon} alt="Backpack" className="w-10 h-10 object-contain" />
                       </div>
                     </div>
@@ -131,7 +141,7 @@ export default function App() {
                       <Button
                         asChild
                         size="lg"
-                        className="bg-orange-600 hover:bg-orange-700 text-white text-lg px-8 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200"
+                        className="bg-orange-600 hover:bg-orange-700 text-white text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-2xl btn-animated"
                       >
                         <a
                           href="https://apps.apple.com/app/id6749825722"
@@ -149,7 +159,7 @@ export default function App() {
                       <Button
                         asChild
                         variant="outline"
-                        className="bg-blue-500 hover:bg-blue-600 text-white border-blue-500 rounded-full px-6 py-2"
+                        className="bg-blue-500 hover:bg-blue-600 text-white border-blue-500 rounded-full px-6 py-2 shadow-md hover:shadow-xl btn-animated"
                       >
                         <a
                           href="https://t.me/+9r6mKQuDwtMxNzdi"
@@ -165,7 +175,7 @@ export default function App() {
                       <Button
                         asChild
                         variant="outline"
-                        className="bg-green-500 hover:bg-green-600 text-white border-green-500 rounded-full px-6 py-2"
+                        className="bg-green-500 hover:bg-green-600 text-white border-green-500 rounded-full px-6 py-2 shadow-md hover:shadow-xl btn-animated"
                       >
                         <a
                           href="https://docs.google.com/forms/d/e/1FAIpQLSdhBsAiVDsFjXHKlhsravX7DQwNWafxHgn_vISj7WkMWl7k0w/viewform?usp=dialog"
@@ -181,7 +191,7 @@ export default function App() {
                       <Button
                         asChild
                         variant="outline"
-                        className="bg-purple-500 hover:bg-purple-600 text-white border-purple-500 rounded-full px-6 py-2"
+                        className="bg-purple-500 hover:bg-purple-600 text-white border-purple-500 rounded-full px-6 py-2 shadow-md hover:shadow-xl btn-animated"
                       >
                         <a
                           href="https://docs.google.com/forms/d/17IeZPlwZYqihaaBet6IZVGyDgejLz8R5K9wiWVz8qTc/edit"
@@ -200,7 +210,7 @@ export default function App() {
             </TabsContent>
 
             <TabsContent value="privacy">
-              <Card className="bg-white/95 backdrop-blur-sm shadow-xl rounded-3xl border-0 overflow-hidden">
+              <Card className="bg-white/95 backdrop-blur-sm rounded-3xl border-0 overflow-visible card-animated">
                 <CardContent className="p-8 lg:p-12">
                   <div className="legal-content max-w-none">
                     <h2 className="text-3xl lg:text-4xl font-extrabold text-center tracking-tight mb-6">Privacy Policy</h2>
@@ -256,7 +266,7 @@ export default function App() {
             </TabsContent>
 
             <TabsContent value="terms">
-              <Card className="bg-white/95 backdrop-blur-sm shadow-xl rounded-3xl border-0 overflow-hidden">
+              <Card className="bg-white/95 backdrop-blur-sm rounded-3xl border-0 overflow-visible card-animated">
                 <CardContent className="p-8 lg:p-12">
                   <div className="legal-content max-w-none">
                     <h2 className="text-3xl lg:text-4xl font-extrabold text-center tracking-tight mb-6">Terms of Service</h2>
@@ -287,14 +297,14 @@ export default function App() {
             </TabsContent>
 
             <TabsContent value="support">
-              <Card className="bg-white/95 backdrop-blur-sm shadow-xl rounded-3xl border-0 overflow-hidden">
+              <Card className="bg-white/95 backdrop-blur-sm rounded-3xl border-0 overflow-visible card-animated">
                 <CardContent className="p-8 lg:p-12">
                   <div className="text-center">
                     <h2 className="text-3xl mb-8 text-gray-800">Support & Contact</h2>
 
                     <div className="grid md:grid-cols-2 gap-8 mb-8">
                       <div className="space-y-4">
-                        <div className="bg-gray-50 rounded-2xl p-6">
+                        <div className="bg-gray-50 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow">
                           <h3 className="text-xl mb-4">📧 Contact Information</h3>
                           <p className="mb-2">
                             <strong>Email:</strong>
@@ -312,12 +322,12 @@ export default function App() {
                       </div>
 
                       <div className="space-y-4">
-                        <div className="bg-gray-50 rounded-2xl p-6">
+                        <div className="bg-gray-50 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow">
                           <h3 className="text-xl mb-4">🔗 Quick Links</h3>
                           <div className="space-y-3">
                             <Button
                               asChild
-                              className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full"
+                              className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-md hover:shadow-xl btn-animated"
                             >
                               <a
                                 href="https://t.me/+9r6mKQuDwtMxNzdi"
@@ -332,7 +342,7 @@ export default function App() {
 
                             <Button
                               asChild
-                              className="w-full bg-green-500 hover:bg-green-600 text-white rounded-full"
+                              className="w-full bg-green-500 hover:bg-green-600 text-white rounded-full shadow-md hover:shadow-xl btn-animated"
                             >
                               <a
                                 href="https://docs.google.com/forms/d/e/1FAIpQLSdhBsAiVDsFjXHKlhsravX7DQwNWafxHgn_vISj7WkMWl7k0w/viewform?usp=dialog"
@@ -347,7 +357,7 @@ export default function App() {
 
                             <Button
                               asChild
-                              className="w-full bg-purple-500 hover:bg-purple-600 text-white rounded-full"
+                              className="w-full bg-purple-500 hover:bg-purple-600 text-white rounded-full shadow-md hover:shadow-xl btn-animated"
                             >
                               <a
                                 href="https://docs.google.com/forms/d/17IeZPlwZYqihaaBet6IZVGyDgejLz8R5K9wiWVz8qTc/edit"
@@ -364,7 +374,7 @@ export default function App() {
                       </div>
                     </div>
 
-                    <div className="mx-auto max-w-3xl rounded-2xl ring-1 ring-yellow-200 bg-yellow-50 p-4">
+                    <div className="mx-auto max-w-3xl rounded-2xl ring-1 ring-yellow-200 bg-yellow-50 p-4 shadow-sm">
                       <p className="text-yellow-800 flex items-center justify-center gap-2">
                         <img src={clockIcon} alt="Response time" className="w-5 h-5 object-contain" />
                         <span><strong>Response Time:</strong> We aim to respond within 24 hours.</span>

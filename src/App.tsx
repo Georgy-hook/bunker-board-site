@@ -130,13 +130,13 @@ export default function App() {
                       </div>
                       <div
                         className="absolute left-1/4 z-[2] bounce-soft pointer-events-none"
-                        style={{ bottom: "clamp(0rem, 0vw, 0rem)" }}
+                        style={{ bottom: "clamp(-2rem, -2vw, -2rem)" }}
                       >
                         <img src={fishIcon} alt="Radiation" className="w-10 h-10 object-contain" />
                       </div>
                       <div
                         className="absolute right-1/4 z-[2] bounce-soft pointer-events-none"
-                        style={{ bottom: "clamp(0rem, 0vw, 0em)" }}
+                        style={{ bottom: "clamp(-2rem, -2vw, -2em)" }}
                       >
                         <img src={backpackIcon} alt="Backpack" className="w-10 h-10 object-contain" />
                       </div>

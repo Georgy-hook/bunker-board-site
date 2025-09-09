@@ -105,11 +105,12 @@ export default function App() {
                       <img
                         src={bunkerLogo}
                         alt="Bunker Logo"
-                        className="relative z-[1] mx-auto w-full max-w-lg h-auto drop-shadow-2xl"
+                        className="relative z-[1] mx-auto h-auto drop-shadow-2xl"
+                        style={{ width: "clamp(6rem, 30vw, 28rem)" }}
                       />
                       <div
                         className="absolute left-2 sm:left-4 z-[2] bounce-soft pointer-events-none"
-                        style={{ top: "clamp(1rem, 6vw, 2.5rem)" }}
+                        style={{ top: "clamp(0rem, 0vw, 0rem)" }}
                       >
                         <img
                           src={dogIcon}
@@ -119,7 +120,7 @@ export default function App() {
                       </div>
                       <div
                         className="absolute right-2 sm:right-4 z-[2] bounce-soft delay-1 pointer-events-none"
-                        style={{ top: "clamp(1rem, 6vw, 2.5rem)" }}
+                        style={{ top: "clamp(0rem, 0vw, 0rem)" }}
                       >
                         <img
                           src={characterImage2}
@@ -129,13 +130,13 @@ export default function App() {
                       </div>
                       <div
                         className="absolute left-1/4 z-[2] bounce-soft pointer-events-none"
-                        style={{ bottom: "clamp(0.5rem, 2.2vw, 1.25rem)" }}
+                        style={{ bottom: "clamp(0rem, 0vw, 0rem)" }}
                       >
                         <img src={fishIcon} alt="Radiation" className="w-10 h-10 object-contain" />
                       </div>
                       <div
                         className="absolute right-1/4 z-[2] bounce-soft pointer-events-none"
-                        style={{ bottom: "clamp(0.5rem, 2.2vw, 1.25rem)" }}
+                        style={{ bottom: "clamp(0rem, 0vw, 0em)" }}
                       >
                         <img src={backpackIcon} alt="Backpack" className="w-10 h-10 object-contain" />
                       </div>

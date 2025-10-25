@@ -4,15 +4,7 @@
     "details": [
       {
         "appIDs": ["B398YAHD36.com.georgyHK.BunkerApp"],
-        "components": [
-          {
-            "/": "/join",
-            "query": { "code": "BNKR-????" }
-          },
-          {
-            "/": "/join/BNKR-????"
-          }
-        ],
+        "components": [{ "/": "/*" }],
         "defaults": {
           "caseSensitive": true,
           "percentEncoded": true

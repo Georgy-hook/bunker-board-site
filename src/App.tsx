@@ -2,6 +2,7 @@ import { Button } from "./components/ui/button";
 import { Card, CardContent } from "./components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import bunkerLogo from "figma:asset/af3b0ac35568f0c21ec86e6301202642d53c9127.png";
+import JoinPage from "./pages/JoinPage";
 import characterImage2 from "figma:asset/01dd0ce9e0b60769d8e2373f6148055f34ea473a.png";
 import iosLogo from "figma:asset/c2ee98b3b52bcc7fc4a05bff8e8d653ad06349b6.png";
 import houseIcon from "figma:asset/114ebae2afe3a8a82f1ffeca9290fb1759e0ab3a.png";
@@ -19,6 +20,14 @@ import clockIcon from "./assets/clock-icon.png";
 import iosIcon2 from "./assets/ios-icon-logo.png";
 
 export default function App() {
+  if (typeof window !== "undefined") {
+    const pathname = window.location.pathname;
+
+    if (pathname === "/join" || pathname.startsWith("/join/")) {
+      return <JoinPage />;
+    }
+  }
+
   return (
     <div
       className="min-h-screen"

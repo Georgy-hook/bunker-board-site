@@ -11,6 +11,9 @@
           },
           {
             "/": "/join/BNKR-????"
+          },
+          {
+            "/": "/create"
           }
         ],
         "defaults": {

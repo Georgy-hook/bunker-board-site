@@ -1,0 +1,26 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["B398YAHD36.com.georgyHK.BunkerApp"],
+        "components": [
+          {
+            "/": "/join",
+            "query": { "code": "BNKR-????" }
+          },
+          {
+            "/": "/join/BNKR-????"
+          },
+          {
+            "/": "/create"
+          }
+        ],
+        "defaults": {
+          "caseSensitive": true,
+          "percentEncoded": true
+        }
+      }
+    ]
+  }
+}

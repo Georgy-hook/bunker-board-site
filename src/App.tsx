@@ -52,10 +52,10 @@ export default function App() {
           <h1 className="text-4xl lg:text-5xl text-white drop-shadow-lg flex items-center gap-3">
             <img
               src={houseIcon}
-              alt="Bunker Board House"
+              alt="Vault House"
               className="w-12 h-12 lg:w-16 lg:h-16 object-contain"
             />
-            Bunker Board
+            Vault
           </h1>
           <Button
             asChild
@@ -88,8 +88,8 @@ export default function App() {
                 Privacy Policy
               </TabsTrigger>
               <TabsTrigger value="terms" className="text-sm lg:text-base gap-2 transition-all hover:shadow-md hover:-translate-y-0.5">
-                <img src={termsIcon} alt="Terms of Use" className="w-5 h-5 object-contain" />
-                Terms of Use
+                <img src={termsIcon} alt="Terms of Service" className="w-5 h-5 object-contain" />
+                Terms of Service
               </TabsTrigger>
               <TabsTrigger value="support" className="text-sm lg:text-base gap-2 transition-all hover:shadow-md hover:-translate-y-0.5">
                 <img src={supportIcon} alt="Support" className="w-5 h-5 object-contain" />
@@ -104,7 +104,7 @@ export default function App() {
                     <div className="relative mb-8 pt-28 sm:pt-20 lg:pt-16 pb-24 lg:pb-28 px-6 sm:px-12 overflow-visible min-h-[300px] sm:min-h-[360px] lg:min-h-[420px]">
                       <img
                         src={bunkerLogo}
-                        alt="Bunker Logo"
+                        alt="Vault Logo"
                         className="relative z-[1] mx-auto h-auto drop-shadow-2xl"
                         style={{ width: "clamp(6rem, 30vw, 28rem)" }}
                       />
@@ -142,12 +142,10 @@ export default function App() {
                       </div>
                     </div>
 
-                    <h2 className="text-3xl lg:text-4xl mb-6 text-gray-800">
-                      Bunker Board — Survive the Debate
-                    </h2>
+                    <h2 className="text-3xl lg:text-4xl mb-6 text-gray-800">Vault - Survive the Debate</h2>
 
                     <p className="text-lg lg:text-xl leading-relaxed text-gray-700 max-w-4xl mx-auto mb-8">
-                      Bunker Board is a fast, social survival debate for 4–12 players. Spin up a session, share a join code, and jump into an evolving apocalypse with a living bunker: capacity, area, time left, food reserves, and cozy-factor all shift as events unfold. Every player brings a unique mix of traits — Bio, Conditions, Body Type, Personality, Hobby, Phobia, Knowledge, Backpack, and Extra Info — plus an always-visible Profession. Reveal strengths, craft your pitch, and convince the group you're essential. Some rounds spotlight stories; others bring ruthless elimination votes. Timers keep the pace, and the final stats reveal who makes it into the bunker. Build the ultimate team… or get left outside.
+                      Vault is a fast, social survival debate for 4-12 players. Spin up a session, share a join code, and jump into an evolving apocalypse with a living bunker: capacity, area, time left, food reserves, and cozy-factor all shift as events unfold. Every player brings a unique mix of traits - Bio, Conditions, Body Type, Personality, Hobby, Phobia, Knowledge, Backpack, and Extra Info - plus an always-visible Profession. Reveal strengths, craft your pitch, and convince the group you're essential. Some rounds spotlight stories; others bring ruthless elimination votes. Timers keep the pace, and the final stats reveal who makes it into the bunker. Build the ultimate team or get left outside.
                     </p>
 
                     <div className="flex flex-col lg:flex-row items-center justify-center gap-4 mb-8">
@@ -227,10 +225,10 @@ export default function App() {
                 <CardContent className="p-8 lg:p-12">
                   <div className="legal-content max-w-none">
                     <h2 className="text-3xl lg:text-4xl font-extrabold text-center tracking-tight mb-6">Privacy Policy</h2>
-                    <p>This privacy policy applies to the Bunker Board app (hereby referred to as "Application") for mobile devices that was created by Pavlina Gluhova (hereby referred to as "Service Provider") as a freemium service with optional subscriptions. This service is intended for use "AS IS".</p>
+                    <p>This privacy policy applies to the Vault: the board game app (hereby referred to as "Application") for mobile devices that was created by Pavlina Gluhova (hereby referred to as "Service Provider") as a freemium service with optional subscriptions. This service is intended for use "AS IS".</p>
 
                     <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Information Collection and Use</h3>
-                    <p>The Application collects information when you download and use it. This information may include information such as</p>
+                    <p>The Application collects information when you download and use it. This information may include information such as:</p>
                     <ul>
                       <li>Your device's Internet Protocol address (e.g. IP address)</li>
                       <li>The pages of the Application that you visit, the time and date of your visit, the time spent on those pages</li>
@@ -248,18 +246,18 @@ export default function App() {
                       <li>as required by law, such as to comply with a subpoena, or similar legal process;</li>
                       <li>when they believe in good faith that disclosure is necessary to protect their rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;</li>
                       <li>with their trusted services providers who work on their behalf, do not have an independent use of the information we disclose to them, and have agreed to adhere to the rules set forth in this privacy statement.</li>
+                      <li>The Application uses third-party services for subscriptions and analytics, including Apphud, as well as the payment systems of Apple App Store and Google Play. These services may collect information as described in their own privacy policies.</li>
                     </ul>
-                    <p>The Application uses third-party services for subscriptions and analytics, including Apphud, as well as the payment systems of Apple App Store and Google Play. These services may collect information as described in their own privacy policies.</p>
 
                     <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Opt-Out Rights</h3>
                     <p>You can stop all collection of information by the Application easily by uninstalling it. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network.</p>
 
                     <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Data Retention Policy</h3>
-                    <p>The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. If you'd like them to delete User Provided Data that you have provided via the Application, please contact them at <a href="mailto:georgin2000155@gmail.com" className="text-orange-600 hover:text-orange-700">georgin2000155@gmail.com</a>. and they will respond in a reasonable time.</p>
+                    <p>The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. If you'd like them to delete User Provided Data that you have provided via the Application, please contact them at <a href="mailto:georgin2000155@gmail.com" className="text-orange-600 hover:text-orange-700">georgin2000155@gmail.com</a> and they will respond in a reasonable time.</p>
 
                     <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Children</h3>
                     <p>The Service Provider does not use the Application to knowingly solicit data from or market to children under the age of 13.</p>
-                    <p>The Service Provider does not knowingly collect personally identifiable information from children. The Service Provider encourages all children to never submit any personally identifiable information through the Application and/or Services. The Service Provider encourage parents and legal guardians to monitor their children's Internet usage and to help enforce this Policy by instructing their children never to provide personally identifiable information through the Application and/or Services without their permission. If you have reason to believe that a child has provided personally identifiable information to the Service Provider through the Application and/or Services, please contact the Service Provider (<a href="mailto:georgin2000155@gmail.com" className="text-orange-600 hover:text-orange-700">georgin2000155@gmail.com</a>.) so that they will be able to take the necessary actions. You must also be at least 16 years of age to consent to the processing of your personally identifiable information in your country (in some countries we may allow your parent or guardian to do so on your behalf).</p>
+                    <p>The Service Provider does not knowingly collect personally identifiable information from children. The Service Provider encourages all children to never submit any personally identifiable information through the Application and/or Services. The Service Provider encourage parents and legal guardians to monitor their children's Internet usage and to help enforce this Policy by instructing their children never to provide personally identifiable information through the Application and/or Services without their permission. If you have reason to believe that a child has provided personally identifiable information to the Service Provider through the Application and/or Services, please contact the Service Provider (<a href="mailto:georgin2000155@gmail.com" className="text-orange-600 hover:text-orange-700">georgin2000155@gmail.com</a>) so that they will be able to take the necessary actions. You must also be at least 16 years of age to consent to the processing of your personally identifiable information in your country (in some countries we may allow your parent or guardian to do so on your behalf).</p>
 
                     <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Security</h3>
                     <p>The Service Provider is concerned about safeguarding the confidentiality of your information. The Service Provider provides physical, electronic, and procedural safeguards to protect information the Service Provider processes and maintains.</p>
@@ -285,7 +283,7 @@ export default function App() {
                     <h2 className="text-3xl lg:text-4xl font-extrabold text-center tracking-tight mb-6">Terms of Service</h2>
 
                     <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Terms & Conditions</h3>
-                    <p>These terms and conditions apply to the Bunker Board app (hereby referred to as "Application") for mobile devices that was created by Pavlina Gluhova (hereby referred to as "Service Provider") as a Free service with optional subscriptions.</p>
+                    <p>These terms and conditions apply to the Vault: the board game app (hereby referred to as "Application") for mobile devices that was created by Pavlina Gluhova (hereby referred to as "Service Provider") as a Free service with optional subscriptions.</p>
                     <p>Upon downloading or utilizing the Application, you are automatically agreeing to the following terms. It is strongly advised that you thoroughly read and understand these terms prior to using the Application. Unauthorized copying, modification of the Application, any part of the Application, or our trademarks is strictly prohibited. Any attempts to extract the source code of the Application, translate the Application into other languages, or create derivative versions are not permitted. All trademarks, copyrights, database rights, and other intellectual property rights related to the Application remain the property of the Service Provider.</p>
                     <p>The Service Provider is dedicated to ensuring that the Application is as beneficial and efficient as possible. As such, they reserve the right to modify the Application or charge for their services at any time and for any reason. The Service Provider assures you that any charges for the Application or its services will be clearly communicated to you.</p>
                     <p>The Application stores and processes personal data that you have provided to the Service Provider in order to provide the Service. It is your responsibility to maintain the security of your phone and access to the Application. The Service Provider strongly advises against jailbreaking or rooting your phone, which involves removing software restrictions and limitations imposed by the official operating system of your device. Such actions could expose your phone to malware, viruses, malicious programs, compromise your phone's security features, and may result in the Application not functioning correctly or at all.</p>
@@ -295,8 +293,10 @@ export default function App() {
                     <p>In terms of the Service Provider's responsibility for your use of the application, it is important to note that while they strive to ensure that it is updated and accurate at all times, they do rely on third parties to provide information to them so that they can make it available to you. The Service Provider accepts no liability for any loss, direct or indirect, that you experience as a result of relying entirely on this functionality of the application.</p>
                     <p>The Application uses third-party services to handle subscriptions and in-app purchases, including Apphud, as well as the payment systems of Apple App Store and Google Play. These third parties have their own Terms of Service and Privacy Policies, and by using the Application you also agree to be bound by their terms.</p>
                     <p>The Service Provider may wish to update the application at some point. The application is currently available as per the requirements for the operating system (and for any additional systems they decide to extend the availability of the application to) may change, and you will need to download the updates if you want to continue using the application. The Service Provider does not guarantee that it will always update the application so that it is relevant to you and/or compatible with the particular operating system version installed on your device. However, you agree to always accept updates to the application when offered to you. The Service Provider may also wish to cease providing the application and may terminate its use at any time without providing termination notice to you. Unless they inform you otherwise, upon any termination:</p>
-                    <p>(a) the rights and licenses granted to you in these terms will end;</p>
-                    <p>(b) you must cease using the application, and (if necessary) delete it from your device.</p>
+                    <ul>
+                      <li>(a) the rights and licenses granted to you in these terms will end;</li>
+                      <li>(b) you must cease using the application, and (if necessary) delete it from your device.</li>
+                    </ul>
 
                     <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Changes to These Terms and Conditions</h3>
                     <p>The Service Provider may periodically update their Terms and Conditions. Therefore, you are advised to review this page regularly for any changes. The Service Provider will notify you of any changes by posting the new Terms and Conditions on this page.</p>
@@ -404,7 +404,7 @@ export default function App() {
       <footer className="p-6 mt-12">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-white/90 drop-shadow-md">
-            © 2025 Bunker Board. Pavlina Gluhova. All rights reserved.
+            © 2025 Vault. Pavlina Gluhova. All rights reserved.
           </p>
         </div>
       </footer>

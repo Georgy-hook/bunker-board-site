@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogType?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  canonicalUrl?: string;
+  lang?: string;
+}
+
+const {
+  title = "Vault — party game app for iOS",
+  description = "Vault — fast social survival debate game for 4-12 players",
+  ogTitle,
+  ogDescription,
+  ogType = "website",
+  ogImage = "/og-main.png",
+  ogImageAlt = "Vault — Survive the Debate",
+  canonicalUrl,
+  lang = "en",
+} = Astro.props;
+
+const siteUrl = "https://vaultgame.app";
+const resolvedOgImage = ogImage.startsWith("http")
+  ? ogImage
+  : new URL(ogImage, siteUrl).toString();
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#FDAC04" />
+    <meta property="og:title" content={ogTitle || title} />
+    <meta property="og:description" content={ogDescription || description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle || title} />
+    <meta name="twitter:description" content={ogDescription || description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <slot name="head" />
+  </head>
+  <body>
+    <div
+      class="min-h-screen"
+      style="background: radial-gradient(circle at center, #FDAC04 0%, #E95600 100%); font-family: 'Classic Comic', 'Comic Sans MS', 'Comic Neue', 'Chalkboard SE', cursive;"
+    >
+      <slot />
+    </div>
+  </body>
+</html>

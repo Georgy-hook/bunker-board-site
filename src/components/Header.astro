@@ -1,0 +1,43 @@
+---
+import houseIcon from '../assets/114ebae2afe3a8a82f1ffeca9290fb1759e0ab3a.png';
+import iosIcon from '../assets/ios-icon-logo.png';
+---
+
+<header class="p-4 lg:p-6">
+  <div class="max-w-6xl mx-auto flex items-center justify-between gap-2 sm:gap-3">
+    <a href="/" class="text-2xl sm:text-4xl lg:text-5xl text-white drop-shadow-lg flex items-center gap-1.5 sm:gap-3 no-underline flex-shrink-0">
+      <img
+        src={houseIcon.src}
+        alt="Vault House"
+        class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 object-contain"
+      />
+      Vault
+    </a>
+    <nav class="flex items-center gap-1.5 sm:gap-4">
+      <a
+        href="/tips"
+        class="text-white/90 hover:text-white text-xs sm:text-base lg:text-lg font-medium transition-colors"
+      >
+        Советы
+      </a>
+      <a
+        href="https://apps.apple.com/app/id6749825722"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="app-badge hidden sm:flex items-center gap-2 text-base lg:text-lg px-4 lg:px-6 py-2.5 lg:py-3 bg-black text-white hover:bg-gray-800 shadow-lg btn-animated rounded-md font-medium flex-shrink-0"
+      >
+        <img src={iosIcon.src} alt="iOS App Store" />
+        Download on iOS
+      </a>
+      <a
+        href="https://apps.apple.com/app/id6749825722"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="app-badge flex sm:hidden items-center gap-1 text-xs px-2 py-2 bg-black text-white hover:bg-gray-800 shadow-lg btn-animated rounded-md font-medium flex-shrink-0"
+      >
+        <img src={iosIcon.src} alt="iOS" />
+        iOS
+      </a>
+    </nav>
+  </div>
+</header>

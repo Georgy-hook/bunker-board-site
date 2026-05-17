@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Vault bunker">
+  <path d="M5 15.8 16 6l11 9.8" fill="none" stroke="#442500" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M7.5 15.4 16 8l8.5 7.4V27H7.5V15.4Z" fill="#FFD735" stroke="#442500" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M5 15.8 16 6l11 9.8-2.2 2.4L16 10.4 7.2 18.2 5 15.8Z" fill="#E95600" stroke="#442500" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M12 27v-6.6a4 4 0 0 1 8 0V27" fill="#7B3F12" stroke="#442500" stroke-width="1.8"/>
+  <path d="M20.5 18.5h2.9v3h-2.9zM8.8 18.5h2.9v3H8.8z" fill="#FFE38A" stroke="#442500" stroke-width="1.2"/>
+</svg>

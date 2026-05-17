@@ -7,10 +7,10 @@
         "components": [
           {
             "/": "/join",
-            "query": { "code": "BNKR-????" }
+            "query": { "code": "BNKR-??????" }
           },
           {
-            "/": "/join/BNKR-????"
+            "/": "/join/BNKR-??????"
           },
           {
             "/": "/create"

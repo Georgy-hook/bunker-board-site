@@ -1,56 +1,88 @@
----
+# Vault — Landing & Deep-Link Site
 
-# Vault - Landing Page
-
-![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![Astro](https://img.shields.io/badge/astro-%23BC52EE.svg?style=for-the-badge&logo=astro&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232A.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Netlify](https://img.shields.io/badge/netlify-%2300C7B7.svg?style=for-the-badge&logo=netlify&logoColor=white)
 
-Этот репозиторий содержит исходный код для официальной посадочной страницы (landing page) мобильной игры **Vault: the board game**.
+Официальный сайт мобильной игры **Vault: the board game** — [vaultgame.app](https://vaultgame.app).
 
-## 🎮 Об игре
+## Об игре
 
-**Vault** — это быстрая социальная игра-дебаты на выживание для 4–12 игроков. Создайте сессию, поделитесь кодом для присоединения и погрузитесь в развивающийся апокалипсис с живым бункером: вместимость, площадь, оставшееся время, запасы еды и уровень уюта меняются по мере развития событий.
+**Vault** — быстрая социальная игра-дебаты на выживание для 4–12 игроков. Создайте сессию, поделитесь кодом и погрузитесь в апокалипсис с живым бункером: вместимость, площадь, время, еда и уют меняются по ходу игры. Каждый игрок обладает уникальным набором черт — раскрывайте сильные стороны, убеждайте группу и боритесь за место в бункере.
 
-Каждый игрок обладает уникальным набором черт, а также всегда видимой профессией. Раскрывайте свои сильные стороны, убеждайте группу в своей незаменимости и боритесь за место в бункере. Таймеры поддерживают динамичный темп, а итоговая статистика покажет, кто выжил. Соберите идеальную команду... или останьтесь снаружи.
+## Назначение сайта
 
-## 📄 Назначение этого сайта
+- **Презентация игры** — описание и ссылка на App Store.
+- **Tips & Tricks** — советы и стратегии для игроков.
+- **Deep Links** — страницы `/join` и `/create` для Universal Links (iOS); при отсутствии приложения пользователь видит fallback-страницу.
+- **Юридическая информация** — Privacy Policy и Terms of Service (табы на главной).
+- **Поддержка** — Telegram-канал, форма багов, предложения контента.
 
-Этот сайт служит центральным хабом для игры и выполняет несколько ключевых функций:
+## Стек технологий
 
--   **Презентация игры:** Ярко и кратко описывает суть Vault для новых игроков.
--   **Ссылки на скачивание:** Предоставляет прямую ссылку для загрузки приложения из App Store.
--   **Юридическая информация:** Содержит вкладки с Политикой конфиденциальности и Terms of Service.
--   **Поддержка и обратная связь:** Предоставляет ссылки для связи с разработчиками, сообщения об ошибках и предложений по улучшению игры.
+| Слой | Технология |
+|------|-----------|
+| Фреймворк | [Astro 5](https://astro.build/) (static output) |
+| Интерактив | React 18 (Astro islands) |
+| Стили | Tailwind CSS 3 + кастомный шрифт Classic Comic |
+| Деплой | Netlify (static hosting) |
+| Sitemap | `@astrojs/sitemap` |
 
-## 🚀 Как запустить проект локально
+## Структура проекта
 
-Эти инструкции помогут вам запустить копию проекта на вашем локальном компьютере для разработки и тестирования.
+```
+src/
+├── assets/              # Изображения (иконки, OG-картинки)
+├── components/
+│   ├── Header.astro     # Шапка с навигацией
+│   ├── Footer.astro     # Подвал
+│   ├── islands/         # React-компоненты (client:load)
+│   │   ├── TabsSection.tsx
+│   │   ├── DescriptionTab.tsx
+│   │   ├── PrivacyTab.tsx
+│   │   ├── TermsTab.tsx
+│   │   └── SupportTab.tsx
+│   └── ui/              # Утилиты (cn, useMobile)
+├── layouts/
+│   └── BaseLayout.astro # Общий layout (SEO, OG, theme)
+├── modules/
+│   └── content/         # Типы и данные сайта (siteConfig, contact, links)
+├── pages/
+│   ├── index.astro      # Главная страница
+│   ├── tips.astro       # Tips & Tricks
+│   ├── join.astro       # Deep link — присоединиться к сессии
+│   └── create.astro     # Deep link — создать сессию
+└── styles/
+    └── global.css       # Tailwind layers + кастомные анимации
+public/
+├── _headers             # Netlify headers (AASA)
+├── _redirects           # Netlify redirects
+├── og-main.png          # OG-картинка главной
+├── og-tips.png          # OG-картинка tips
+└── tips-icons/          # Иконки для карточек tips
+```
 
-### Предварительные требования
+## Локальная разработка
 
-Убедитесь, что на вашем компьютере установлены [Node.js](https://nodejs.org/) и npm (Node Package Manager).
+```sh
+git clone https://github.com/<your-org>/BunkerSite.git
+cd BunkerSite
+npm install
+npm run dev          # http://localhost:4321
+```
 
-### Установка и запуск
+### Скрипты
 
-1.  **Клонируйте репозиторий** (если вы еще этого не сделали):
-    ```sh
-    git clone <адрес-вашего-репозитория>
-    cd BunkerSite
-    ```
+| Команда | Описание |
+|---------|----------|
+| `npm run dev` | Dev-сервер с HMR |
+| `npm run build` | Продакшн-сборка в `dist/` |
+| `npm run preview` | Превью собранного сайта |
 
-2.  **Установите зависимости:**
-    Выполните эту команду в терминале, находясь в корневой папке проекта. Она скачает все необходимые пакеты, перечисленные в `package.json`.
-    ```sh
-    npm install
-    ```
+## Деплой (Netlify)
 
-3.  **Запустите сервер для разработки:**
-    Эта команда запустит локальный сервер. Сайт будет доступен в вашем браузере.
-    ```sh
-    npm run dev
-    ```
+Build command: `npm ci && npm run build`
+Publish directory: `dist`
 
-После запуска вы увидите в терминале адрес, по которому можно открыть сайт (обычно это `http://localhost:5173`).
-
----
+Сайт деплоится автоматически при пуше в основную ветку.

@@ -15,9 +15,16 @@
 
 - **Презентация игры** — описание и ссылка на App Store.
 - **Tips & Tricks** — советы и стратегии для игроков.
-- **Deep Links** — страницы `/join` и `/create` для Universal Links (iOS); при отсутствии приложения пользователь видит fallback-страницу.
+- **Deep Links** — страницы `/join` и `/create` для Universal Links/App Links; при отсутствии приложения пользователь видит fallback-страницу.
 - **Юридическая информация** — Privacy Policy и Terms of Service (табы на главной).
 - **Поддержка** — Telegram-канал, форма багов, предложения контента.
+
+## App Links
+
+Android Digital Asset Links лежит в `public/.well-known/assetlinks.json`.
+Текущий fingerprint соответствует локальной debug-подписи Android-порта из
+`./gradlew :app:signingReport`. Перед store-релизом добавьте в этот же файл
+SHA-256 release/app-signing сертификатов Google Play и RuStore.
 
 ## Стек технологий
 

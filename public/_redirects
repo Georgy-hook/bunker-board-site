@@ -1,5 +1,7 @@
 # Deep link fallback: if app not installed, user sees the static page
 # Static files take priority — /join/index.html and /create/index.html served automatically
+/join/* /join/ 200
+/create/* /create/ 200
 
 # 404 fallback
 /* /index.html 404

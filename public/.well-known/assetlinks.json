@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.georgyHK.BunkerApp",
+      "sha256_cert_fingerprints": [
+        "3C:13:BC:35:29:BF:26:3D:06:AA:E2:F7:14:7D:6F:B0:1E:2C:43:21:FA:BB:88:69:1D:7C:6B:6E:95:7C:DE:D3"
+      ]
+    }
+  }
+]

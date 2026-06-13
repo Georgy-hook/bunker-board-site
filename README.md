@@ -26,6 +26,16 @@ Android Digital Asset Links лежит в `public/.well-known/assetlinks.json`.
 `./gradlew :app:signingReport`. Перед store-релизом добавьте в этот же файл
 SHA-256 release/app-signing сертификатов Google Play и RuStore.
 
+Release reminder:
+- Debug SHA-256 нужен только для локальной QA-проверки `autoVerify`.
+- Google Play может использовать Play App Signing certificate, а не локальный
+  upload/release keystore. Перед релизом возьмите SHA-256 именно из Play
+  Console: Setup -> App integrity -> App signing key certificate.
+- Для RuStore добавьте SHA-256 сертификата, которым подписывается RuStore
+  release-сборка.
+- После обновления `assetlinks.json` проверьте связь через Google Digital Asset
+  Links API или Android `pm get-app-links com.georgyHK.BunkerApp` на устройстве.
+
 ## Стек технологий
 
 | Слой | Технология |

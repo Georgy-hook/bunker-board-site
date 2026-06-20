@@ -2,86 +2,73 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { defaultTipsLocale, tipsContentByLocale } from '../modules/content';
 
-const title = "Стратегии и советы для настольной игры «Бункер» | Vault";
-const description = "Экспертные стратегии, тактики и советы для победы в настольной игре Бункер. Узнайте, как убеждать, строить альянсы и выживать в апокалипсисе.";
-const canonicalUrl = "https://vaultgame.app/tips";
+const page = tipsContentByLocale[defaultTipsLocale];
 
 const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Стратегии и советы для настольной игры «Бункер»",
-  "description": description,
-  "author": { "@type": "Organization", "name": "Vault Game" },
-  "publisher": { "@type": "Organization", "name": "Vault Game" },
-  "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalUrl },
-  "datePublished": "2025-01-01",
-  "dateModified": "2025-01-01"
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: page.headline,
+  description: page.description,
+  author: { '@type': 'Organization', name: 'Vault Game' },
+  publisher: { '@type': 'Organization', name: 'Vault Game' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': page.canonicalUrl },
+  datePublished: page.datePublished,
+  dateModified: page.dateModified,
 };
 
-const quickTips = [
-  {
-    icon: "/tips-icons/cards.png",
-    title: "Свяжите карты",
-    text: "Соберите профессию, багаж и слабости в одну полезную историю.",
-  },
-  {
-    icon: "/tips-icons/speech.png",
-    title: "Говорите коротко",
-    text: "Оставляйте группе один сильный тезис и понятный финальный аргумент.",
-  },
-  {
-    icon: "/tips-icons/alliance.png",
-    title: "Ищите союзников",
-    text: "Показывайте, как ваши навыки усиливают других игроков в бункере.",
-  },
-];
+const getSectionClass = (sectionId: string) => (sectionId === 'conclusion' ? 'mb-8' : 'mb-12');
+const getTitleClass = (kind: string) =>
+  kind === 'intro' || kind === 'paragraphs'
+    ? 'flex items-start gap-3 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-4'
+    : 'flex items-start gap-3 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-6';
 ---
 
 <BaseLayout
-  title={title}
-  description={description}
-  ogTitle={title}
-  ogDescription={description}
+  title={page.title}
+  description={page.description}
+  ogTitle={page.title}
+  ogDescription={page.description}
   ogType="article"
-  ogImage="/og-tips.png"
-  ogImageAlt="Стратегии и советы для игры Бункер"
-  canonicalUrl={canonicalUrl}
-  lang="ru"
+  ogImage={page.ogImage}
+  ogImageAlt={page.ogImageAlt}
+  canonicalUrl={page.canonicalUrl}
+  lang={page.htmlLang}
 >
   <Fragment slot="head">
-    <meta name="keywords" content="бункер настольная игра, стратегии бункер, советы бункер, как играть в бункер, тактика бункер, настольная игра выживание" />
-    <meta property="og:locale" content="ru_RU" />
+    <meta name="keywords" content={page.keywords} />
+    <meta property="og:locale" content={page.ogLocale} />
+    <link rel="alternate" hreflang={page.htmlLang} href={page.canonicalUrl} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </Fragment>
 
-  <Header />
+  <Header locale={page.locale} />
 
   <main class="p-3 sm:p-4 lg:p-6">
     <article class="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-[1.25rem] sm:rounded-3xl p-5 sm:p-8 lg:p-12 shadow-xl">
-
       <header class="text-center mb-10">
         <div class="relative overflow-hidden rounded-2xl border border-orange-200 bg-orange-50 px-4 py-7 sm:px-8 sm:py-9">
           <img
-            src="/tips-icons/bunker.png"
+            src={page.hero.icon}
             alt=""
             aria-hidden="true"
             class="mx-auto mb-4 h-16 w-16 sm:h-20 sm:w-20 object-contain"
           />
           <h1 class="relative z-10 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
-            Стратегии и советы для настольной игры «Бункер»
+            {page.hero.title}
           </h1>
           <p class="relative z-10 mx-auto max-w-2xl text-sm sm:text-base text-gray-600">
-            Полное руководство для новичков и опытных игроков
+            {page.hero.subtitle}
           </p>
           <img
-            src="/tips-icons/timer.png"
+            src={page.hero.leftDecorIcon}
             alt=""
             aria-hidden="true"
             class="hidden sm:block absolute left-5 top-6 h-14 w-14 rotate-[-10deg] object-contain opacity-90"
           />
           <img
-            src="/tips-icons/backpack.png"
+            src={page.hero.rightDecorIcon}
             alt=""
             aria-hidden="true"
             class="hidden sm:block absolute right-5 bottom-5 h-16 w-16 rotate-[8deg] object-contain opacity-90"
@@ -89,7 +76,7 @@ const quickTips = [
         </div>
 
         <div class="mt-6 grid gap-3 sm:grid-cols-3">
-          {quickTips.map((tip) => (
+          {page.quickTips.map((tip) => (
             <div class="flex items-start gap-3 rounded-2xl border border-orange-100 bg-orange-50/70 p-4 text-left">
               <img src={tip.icon} alt="" aria-hidden="true" class="h-10 w-10 flex-shrink-0 object-contain" />
               <div class="min-w-0">
@@ -101,236 +88,98 @@ const quickTips = [
         </div>
       </header>
 
-      <!-- Введение -->
-      <section class="mb-12">
-        <h2 class="flex items-start gap-3 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-4">
-          <img src="/tips-icons/bunker.png" alt="" aria-hidden="true" class="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 object-contain" />
-          <span class="min-w-0 leading-tight break-words hyphens-auto">Введение</span>
-        </h2>
-        <p class="text-gray-700 leading-relaxed">
-          «Бункер» — это социальная ролевая игра, в которой участники должны убедить других, что их персонаж заслуживает место в спасительном убежище. От исхода переговоров зависит, кто выживет в условиях апокалипсиса. Спортивное или логическое превосходство не гарантирует успеха; решающими являются ораторские навыки, харизма, умение импровизировать и строить стратегию.
-        </p>
-        <p class="text-gray-700 leading-relaxed mt-4">
-          В этом руководстве собраны советы экспертов, авторов и опытных игроков, помогающие новичкам играть более эффективно.
-        </p>
-      </section>
+      {page.sections.map((section) => (
+        <section id={section.id} class={getSectionClass(section.id)}>
+          <h2 class={getTitleClass(section.kind)}>
+            <img src={section.icon} alt="" aria-hidden="true" class="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 object-contain" />
+            <span class="min-w-0 leading-tight break-words hyphens-auto">{section.title}</span>
+          </h2>
 
-      <!-- Подготовка и понимание игры -->
-      <section class="mb-12">
-        <h2 class="flex items-start gap-3 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-6">
-          <img src="/tips-icons/cards.png" alt="" aria-hidden="true" class="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 object-contain" />
-          <span class="min-w-0 leading-tight break-words hyphens-auto">Подготовка и понимание игры</span>
-        </h2>
+          {(section.kind === 'intro' || section.kind === 'paragraphs') && (
+            <div>
+              {(section.paragraphs ?? []).map((paragraph, paragraphIndex) => (
+                <p class:list={['text-gray-700 leading-relaxed', paragraphIndex > 0 && 'mt-4']}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          )}
 
-        <h3 class="text-xl lg:text-2xl font-bold text-gray-700 mb-3">Изучение ролей и сценариев</h3>
-        <ul class="list-disc pl-5 sm:pl-6 space-y-4 text-gray-700 leading-relaxed mb-8">
-          <li>
-            <strong>Разберите карту персонажа и катастрофы.</strong> У каждого участника есть профессия, здоровье, хобби, багаж и иногда особые факты/фобии. Опытные игроки советуют заранее подумать, как каждая характеристика может помочь общему выживанию. Зная детали, легче убедительно рассказать об их ценности.
-          </li>
-          <li>
-            <strong>Учитывайте описание катастрофы и ресурсов бункера.</strong> Катаклизмы различаются по сложности; элементы, не принятые во внимание в начале, могут оказаться критичными в финале. Например, дефицит воды потребует объяснить, где взять пищу и воду, а возможные нападения других групп заставят искать средства защиты. При анализе бункера обращайте внимание на багаж и способности других — они могут оказаться решающими.
-          </li>
-          <li>
-            <strong>Развивайте навыки коммуникации.</strong> Стать убедительным позволяет подготовка: репетиция речей, знание своих сильных и слабых сторон и умение донести информацию понятно и с эмоциями. Заранее изучите возможные сценарии и развивайте ораторские способности, потому что в этой игре главное — способность убеждать.
-          </li>
-        </ul>
+          {(section.kind === 'grouped-list' || section.kind === 'table') &&
+            (section.groups ?? []).map((group, groupIndex) => (
+              <>
+                <h3 class="text-xl lg:text-2xl font-bold text-gray-700 mb-3">{group.heading}</h3>
+                <ul
+                  class:list={[
+                    'list-disc pl-5 sm:pl-6 space-y-4 text-gray-700 leading-relaxed',
+                    groupIndex < (section.groups?.length ?? 0) - 1 || section.kind === 'table' ? 'mb-8' : '',
+                  ]}
+                >
+                  {group.items.map((item) => (
+                    <li>
+                      <strong>{item.title}</strong> {item.text}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ))}
 
-        <h3 class="text-xl lg:text-2xl font-bold text-gray-700 mb-3">Настрой и эмоциональная готовность</h3>
-        <ul class="list-disc pl-5 sm:pl-6 space-y-4 text-gray-700 leading-relaxed">
-          <li>
-            <strong>Восприятие игры как тренажёра переговоров.</strong> «Бункер» учит презентовать себя и навыки, поэтому относитесь к партии как к упражнению в переговорном искусстве. Заранее решите, какие качества подчеркнуть, а какие — припрятать. Такая «стратегия на выживание» важна для победы.
-          </li>
-          <li>
-            <strong>Отделяйте себя от персонажа.</strong> Карточки могут содержать неприятные или смешные характеристики (возраст, болезни, фобии). Правило: не принимать личные оскорбления, а играть роль. Чем лучше участники входят в образ, тем ярче партия; это помогает избежать обид и конфликтов.
-          </li>
-          <li>
-            <strong>Сохраняйте юмор и позитив.</strong> Игра может быть эмоционально напряжённой. Играйте с азартом и весельем, воспринимайте обсуждения как шутливый спор и не бойтесь импровизировать. Мягкий юмор делает вас привлекательнее для других игроков.
-          </li>
-        </ul>
-      </section>
+          {section.kind === 'table' && section.table && (
+            <>
+              <h3 class="text-xl lg:text-2xl font-bold text-gray-700 mb-3">{section.table.heading}</h3>
+              <div class="overflow-x-auto mb-8">
+                <table class="w-full table-fixed border-collapse text-sm text-gray-700">
+                  <thead>
+                    <tr class="bg-orange-50">
+                      {section.table.headers.map((header) => (
+                        <th class="border border-orange-200 px-3 sm:px-4 py-3 text-left align-top font-bold break-words">
+                          {header}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {section.table.rows.map((row, rowIndex) => (
+                      <tr class:list={[rowIndex % 2 === 1 && 'bg-orange-50/50']}>
+                        <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top font-medium break-words">
+                          {row.label}
+                        </td>
+                        <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top break-words">
+                          {row.description}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
 
-      <!-- Создание убедительного образа -->
-      <section class="mb-12">
-        <h2 class="flex items-start gap-3 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-6">
-          <img src="/tips-icons/speech.png" alt="" aria-hidden="true" class="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 object-contain" />
-          <span class="min-w-0 leading-tight break-words hyphens-auto">Создание убедительного образа</span>
-        </h2>
+          {section.kind === 'ordered-list' && (
+            <ol class="list-decimal pl-5 sm:pl-6 space-y-4 text-gray-700 leading-relaxed">
+              {(section.items ?? []).map((item) => (
+                <li>
+                  <strong>{item.title}</strong> {item.text}
+                </li>
+              ))}
+            </ol>
+          )}
+        </section>
+      ))}
 
-        <h3 class="text-xl lg:text-2xl font-bold text-gray-700 mb-3">Формирование истории</h3>
-        <ul class="list-disc pl-5 sm:pl-6 space-y-4 text-gray-700 leading-relaxed mb-8">
-          <li>
-            <strong>Не перечисляйте карты отдельно.</strong> Связывайте карты в единую историю. Недостаточно просто сказать, что ваша профессия полезна; объясните, почему она важна именно для этой катастрофы и как сочетается с ресурсами бункера. Например, повар подчеркнёт навыки консервирования, а инженер-строитель — умение укрепить убежище.
-          </li>
-          <li>
-            <strong>Придумывайте нестандартные применения.</strong> Примеры: фотограф может организовать фототерапию для психического здоровья группы; мешок семян подсолнечника выступает как источник масла, топлива или защиты; лунатизм можно преподнести как способность охранять бункер ночами. Опытный игрок умеет найти в каждой характеристике потенциал и показать его.
-          </li>
-          <li>
-            <strong>Обращайте внимание на угрозы.</strong> Следите за открытыми картами угроз. Если ваша профессия или багаж помогает против них, обязательно упомяните об этом. Например, в случае эпидемии медик становится незаменимым, а водолаз пригодится при затоплении.
-          </li>
-        </ul>
-
-        <h3 class="text-xl lg:text-2xl font-bold text-gray-700 mb-3">Управление информацией</h3>
-        <ul class="list-disc pl-5 sm:pl-6 space-y-4 text-gray-700 leading-relaxed mb-8">
-          <li>
-            <strong>Не раскрывайте слабости сразу.</strong> Не спешите с негативными данными (например, болезнями). Сначала найдите союзников, расскажите о преимуществах и только потом раскрывайте минусы. Так у вас будет база поддержки.
-          </li>
-          <li>
-            <strong>Припрятывайте невыгодные факты.</strong> После того как посмотрели на карты, подумайте, с какой стороны выгодно себя показать, а какие качества лучше пока скрыть. Однако полное сокрытие может привести к недоверию; главное — выбрать подходящий момент, чтобы обернуть слабость в пользу.
-          </li>
-        </ul>
-
-        <h3 class="text-xl lg:text-2xl font-bold text-gray-700 mb-3">Стиль презентации</h3>
-        <ul class="list-disc pl-5 sm:pl-6 space-y-4 text-gray-700 leading-relaxed">
-          <li>
-            <strong>Говорите уверенно и лаконично.</strong> У вас есть всего 30 секунд на аргументацию. Избегайте длинных или слишком коротких речей и ищите баланс: конкретика запоминается лучше. Также важно следить за временем, чтобы партия не затянулась.
-          </li>
-          <li>
-            <strong>Используйте харизму и юмор.</strong> Яркое, логичное и с юмором представление помогает выделиться. Убедительное выступление производит впечатление даже при наличии «слабых» карт.
-          </li>
-          <li>
-            <strong>Ролевой отыгрыш.</strong> Войдите в образ персонажа: придумайте имя, манеру речи и личную историю. Это добавляет глубины и позволяет лучше аргументировать, почему именно вы нужны в бункере.
-          </li>
-        </ul>
-      </section>
-
-      <!-- Социальная и психологическая стратегия -->
-      <section class="mb-12">
-        <h2 class="flex items-start gap-3 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-6">
-          <img src="/tips-icons/alliance.png" alt="" aria-hidden="true" class="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 object-contain" />
-          <span class="min-w-0 leading-tight break-words hyphens-auto">Социальная и психологическая стратегия</span>
-        </h2>
-
-        <h3 class="text-xl lg:text-2xl font-bold text-gray-700 mb-3">Формирование союзов</h3>
-        <ul class="list-disc pl-5 sm:pl-6 space-y-4 text-gray-700 leading-relaxed mb-8">
-          <li>
-            <strong>Ищите комплементарных игроков.</strong> «Бункер» — игра про командную работу. Если вы сможете убедительно показать, что ваш персонаж дополняет другого (например, агроному нужен охранник, а медработнику — повар), это повысит шанс выживания обоих. Истории о взаимной выгоде создают альянсы.
-          </li>
-          <li>
-            <strong>Не забывайте об изгнанных.</strong> Изгнанные игроки не уходят, они остаются на голосовании и могут мстить тем, кто их «топил». Поэтому не стоит грубо выгонять кого-то без аргументов; лучше сохранить нейтральные отношения.
-          </li>
-          <li>
-            <strong>Следите за настроением группы.</strong> Анализируйте информацию о других, отмечайте подозрительные моменты, помните, кто что говорил, и используйте это при голосовании. Наблюдательность помогает понимать, как распределяется симпатия в группе.
-          </li>
-        </ul>
-
-        <h3 class="text-xl lg:text-2xl font-bold text-gray-700 mb-3">Ведение переговоров</h3>
-        <ul class="list-disc pl-5 sm:pl-6 space-y-4 text-gray-700 leading-relaxed mb-8">
-          <li>
-            <strong>Отличайте себя от персонажа.</strong> Не принимайте критику на личный счёт и не нападайте на других из-за карточек. Игра — это обсуждение персонажей, а не реальных людей. Такое отношение снижает эмоциональное напряжение.
-          </li>
-          <li>
-            <strong>Используйте специальные карты разумно.</strong> В каждой колоде есть карта «особое условие» или действие. Не играйте её сразу; иногда выгоднее ждать подходящего момента, когда карта поменяет ситуацию (например, позволит заменить игрока или изменить катастрофу). Однако следите, чтобы карта не осталась невостребованной.
-          </li>
-          <li>
-            <strong>Будьте адаптивны.</strong> По мере раскрытия карт меняйте планы, корректируйте аргументы, ищите новые связи с другими игроками. Тот, кто упорно держится первоначальной версии, рискует потерять доверие.
-          </li>
-        </ul>
-
-        <h3 class="text-xl lg:text-2xl font-bold text-gray-700 mb-3">Психологические приёмы</h3>
-        <div class="overflow-x-auto mb-8">
-          <table class="w-full table-fixed border-collapse text-sm text-gray-700">
-            <thead>
-              <tr class="bg-orange-50">
-                <th class="border border-orange-200 px-3 sm:px-4 py-3 text-left align-top font-bold break-words">Приём</th>
-                <th class="border border-orange-200 px-3 sm:px-4 py-3 text-left align-top font-bold break-words">Суть</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top font-medium break-words">Контроль эмоций</td>
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top break-words">Сдерживайте агрессию и не переходите на личности; спокойное поведение вызывает доверие.</td>
-              </tr>
-              <tr class="bg-orange-50/50">
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top font-medium break-words">Сбор информации</td>
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top break-words">Запоминайте, кто и что говорил, наблюдайте за невербальными реакциями — это помогает ловить несостыковки и контраргументы.</td>
-              </tr>
-              <tr>
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top font-medium break-words">Тактика подачи</td>
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top break-words">Начинайте с яркой истории, завершайте сильным аргументом; разбивайте речь на две части: основную идею и убедительный финал.</td>
-              </tr>
-              <tr class="bg-orange-50/50">
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top font-medium break-words">Формирование «мы»</td>
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top break-words">Делайте акцент на общей цели и командной пользе, а не на личной выгоде.</td>
-              </tr>
-              <tr>
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top font-medium break-words">Использование юмора</td>
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top break-words">Лёгкие шутки снимают напряжение и делают вас привлекательным союзником.</td>
-              </tr>
-              <tr class="bg-orange-50/50">
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top font-medium break-words">Креативность</td>
-                <td class="border border-orange-100 px-3 sm:px-4 py-3 align-top break-words">Предлагайте нестандартные решения: даже минусы (бессонница, лунатизм) можно обернуть в плюс (ночная охрана).</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- Тактические советы -->
-      <section class="mb-12">
-        <h2 class="flex items-start gap-3 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-6">
-          <img src="/tips-icons/wildcard.png" alt="" aria-hidden="true" class="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 object-contain" />
-          <span class="min-w-0 leading-tight break-words hyphens-auto">Тактические советы</span>
-        </h2>
-        <ol class="list-decimal pl-5 sm:pl-6 space-y-4 text-gray-700 leading-relaxed">
-          <li>
-            <strong>Связывайте карты в историю.</strong> Объясняйте, как профессия, здоровье, хобби, багаж и навыки взаимно дополняют друг друга и помогают именно при данной катастрофе.
-          </li>
-          <li>
-            <strong>Следите за угрозами и картами бункера.</strong> Открытие «неприязненных» условий (например, загрязнения, дефицита еды) — повод подчеркнуть, почему ваш багаж или навыки незаменимы.
-          </li>
-          <li>
-            <strong>Стройте альянсы.</strong> Договаривайтесь с игроками, чьи карты хорошо сочетаются с вашими. Коллективная стратегия убеждения повышает шансы пройти голосование.
-          </li>
-          <li>
-            <strong>Не игнорируйте изгнанных игроков.</strong> Они продолжают участвовать в голосовании и могут влиять на исход игры; поддерживайте добрые отношения.
-          </li>
-          <li>
-            <strong>Используйте карту «особого условия» в нужный момент.</strong> Разыграйте её, когда ситуация станет критической; это может изменить ход партии.
-          </li>
-          <li>
-            <strong>Адаптируйте аргументы.</strong> Если по мере игры открываются новые угрозы или ресурсы, изменяйте рассказ, подчеркивайте новые преимущества. Жёсткая позиция без адаптации вызывает недоверие.
-          </li>
-          <li>
-            <strong>Сохраняйте самообладание.</strong> Контролируйте эмоции во время споров. Агрессия оттолкнёт союзников, в то время как спокойствие и уверенность привлечёт их.
-          </li>
-          <li>
-            <strong>Слушайте и запоминайте.</strong> Наблюдение за речью и невербальными реакциями оппонентов помогает формировать контраргументы и выявлять ложь.
-          </li>
-          <li>
-            <strong>Используйте юмор и харизму.</strong> Яркий, эмоциональный рассказ увлекает и оставляет приятное впечатление.
-          </li>
-          <li>
-            <strong>Относитесь к игре как к тренировке навыков.</strong> «Бункер» — полезный тренажёр переговоров; игра должна приносить удовольствие, а не разногласия.
-          </li>
-        </ol>
-      </section>
-
-      <!-- Заключение -->
-      <section class="mb-8">
-        <h2 class="flex items-start gap-3 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-4">
-          <img src="/tips-icons/bunker.png" alt="" aria-hidden="true" class="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 object-contain" />
-          <span class="min-w-0 leading-tight break-words hyphens-auto">Заключение</span>
-        </h2>
-        <p class="text-gray-700 leading-relaxed">
-          «Бункер» сочетает простые правила и сложные человеческие отношения: игроки вынуждены аргументированно отстаивать свою кандидатуру, при этом оценивая вклад других. Эффективная игра требует подготовки (изучения карт и катастроф), формирования убедительной истории, гибкости в тактике и навыков общения. Помните, что в конце решает не случай и не сила, а способность доказать свою пользу для группы. Используйте приведённые советы, чтобы стать более убедительным и успешно бороться за место в убежище.
-        </p>
-      </section>
-
-      <!-- CTA -->
       <div class="text-center mt-10 pt-8 border-t border-gray-200">
-        <p class="text-gray-600 mb-4">Готовы применить советы на практике?</p>
+        <p class="text-gray-600 mb-4">{page.cta.text}</p>
         <a
-          href="https://apps.apple.com/app/id6749825722"
+          href={page.cta.href}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-base sm:text-lg px-5 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-2xl btn-animated"
         >
-          Скачать Vault для iOS
+          {page.cta.label}
         </a>
       </div>
-
     </article>
   </main>
 
-  <Footer />
+  <Footer locale={page.locale} />
 </BaseLayout>

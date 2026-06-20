@@ -1,7 +1,22 @@
+---
+type FooterLocale = 'en' | 'ru';
+
+interface Props {
+  locale?: FooterLocale;
+}
+
+const { locale = 'en' } = Astro.props;
+
+const copyrightByLocale: Record<FooterLocale, string> = {
+  en: '© 2025 Vault. Pavlina Gluhova. All rights reserved.',
+  ru: '© 2025 Vault. Pavlina Gluhova. Все права защищены.',
+};
+---
+
 <footer class="p-6 mt-12">
   <div class="max-w-6xl mx-auto text-center">
     <p class="text-white/90 drop-shadow-md">
-      &copy; 2025 Vault. Pavlina Gluhova. All rights reserved.
+      {copyrightByLocale[locale]}
     </p>
   </div>
 </footer>

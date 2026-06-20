@@ -1,2 +1,0 @@
-// Admin module placeholder
-export {};

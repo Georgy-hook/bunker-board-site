@@ -1,23 +1,64 @@
-# Vault — Landing & Deep-Link Site
+# Vault — Official Site
 
 ![Astro](https://img.shields.io/badge/astro-%23BC52EE.svg?style=for-the-badge&logo=astro&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232A.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Netlify](https://img.shields.io/badge/netlify-%2300C7B7.svg?style=for-the-badge&logo=netlify&logoColor=white)
 
-Официальный сайт мобильной игры **Vault: the board game** — [vaultgame.app](https://vaultgame.app).
+Официальный статический сайт мобильной игры **Vault: the board game** — [vaultgame.app](https://vaultgame.app).
 
 ## Об игре
 
 **Vault** — быстрая социальная игра-дебаты на выживание для 4–12 игроков. Создайте сессию, поделитесь кодом и погрузитесь в апокалипсис с живым бункером: вместимость, площадь, время, еда и уют меняются по ходу игры. Каждый игрок обладает уникальным набором черт — раскрывайте сильные стороны, убеждайте группу и боритесь за место в бункере.
 
-## Назначение сайта
+## Что делает сайт
 
-- **Презентация игры** — описание и ссылка на App Store.
-- **Tips & Tricks** — локализованные советы и стратегии для игроков (`/tips/`, `/en/tips/`) с переключателем языка.
-- **Deep Links** — страницы `/join` и `/create` для Universal Links/App Links; при отсутствии приложения пользователь видит fallback-страницу.
-- **Юридическая информация** — Privacy Policy и Terms of Service (табы на главной).
-- **Поддержка** — Telegram-канал, форма багов, предложения контента.
+- Презентует игру и ведёт в App Store.
+- Показывает локализованные советы для настольной игры в разделе Tips.
+- Даёт fallback-страницы для deep links `/join` и `/create`.
+- Публикует Privacy Policy и Terms of Service.
+- Принимает баг-репорты и идеи контента через Netlify Forms.
+- Переключает язык через dropdown с флагами.
+
+Это не backend, не админка и не e-commerce-приложение: репозиторий держит только публичный статический сайт, контент, формы и deep-link страницы.
+
+## Локализация
+
+Сайт локализован на 12 языков:
+
+`de`, `en`, `es`, `es-419`, `fr`, `id`, `it`, `ja`, `ko`, `pt-BR`, `ru`, `zh-Hans`.
+
+Основные правила роутинга:
+
+| Страница | Роуты |
+|----------|-------|
+| Главная EN | `/` |
+| Главная для остальных языков | `/{locale}/` |
+| Tips RU | `/tips/` |
+| Tips для остальных языков | `/{locale}/tips/` |
+| Deep links EN | `/join/`, `/create/` |
+| Deep links для остальных языков | `/{locale}/join/`, `/{locale}/create/` |
+
+Локали, метаданные, флаги и alternate-ссылки описаны в `src/modules/content/i18n.ts`.
+Тексты главной, юридических вкладок и deep-link страниц лежат в `src/modules/content/data/site-pages.ts`.
+Советы лежат в `src/modules/content/data/tips.ts`.
+Тексты форм обратной связи лежат в `src/modules/content/data/feedback.ts`.
+
+## Формы обратной связи
+
+Кнопки "Report a bug" и "Suggest an idea" открывают стилизованные формы на сайте. Они отправляются в Netlify Forms:
+
+| Форма | Назначение |
+|-------|------------|
+| `vault-bug-report` | Баг-репорты |
+| `vault-content-idea` | Идеи характеристик, катаклизмов и особенностей бункера |
+
+`public/__forms.html` нужен Netlify, чтобы он находил формы на этапе deploy-time parsing. Не удаляйте его, даже если пользователь его не открывает напрямую.
+
+В Netlify для проекта должно быть включено:
+
+- Forms detection.
+- Email notification для `New form submission`.
 
 ## App Links
 
@@ -50,14 +91,17 @@ Release reminder:
 
 ```
 src/
-├── assets/              # Изображения (иконки, OG-картинки)
+├── assets/              # Изображения и иконки, импортируемые компонентами
 ├── components/
 │   ├── Header.astro     # Шапка с навигацией
 │   ├── Footer.astro     # Подвал
-│   ├── TipsPage.astro   # Общий renderer локализованных tips-страниц
+│   ├── HomePage.astro   # Главная страница выбранной локали
+│   ├── TipsPage.astro   # Общий renderer локализованных Tips-страниц
+│   ├── DeepLinkPage.astro
 │   ├── islands/         # React-компоненты для Astro islands
 │   │   ├── TabsSection.tsx
 │   │   ├── DescriptionTab.tsx
+│   │   ├── FeedbackForms.tsx
 │   │   ├── PrivacyTab.tsx
 │   │   ├── TermsTab.tsx
 │   │   └── SupportTab.tsx
@@ -65,19 +109,20 @@ src/
 ├── layouts/
 │   └── BaseLayout.astro # Общий layout (SEO, OG, theme)
 ├── modules/
-│   └── content/         # Типы и данные сайта (siteConfig, contact, links, tips)
+│   └── content/         # Типы, локализация, данные сайта, tips и формы
 ├── pages/
-│   ├── index.astro      # Главная страница
-│   ├── tips.astro       # Tips & Tricks — RU
-│   ├── en/
-│   │   └── tips.astro   # Tips & Tricks — EN
-│   ├── join.astro       # Deep link — присоединиться к сессии
-│   └── create.astro     # Deep link — создать сессию
+│   ├── index.astro      # Главная EN
+│   ├── tips.astro       # Tips RU
+│   ├── join.astro       # Deep link EN — присоединиться к сессии
+│   ├── create.astro     # Deep link EN — создать сессию
+│   └── [locale]/        # Локализованные главная, tips и deep links
 └── styles/
     └── global.css       # Tailwind layers + кастомные анимации
 public/
 ├── _headers             # Netlify headers (AASA)
 ├── _redirects           # Netlify redirects
+├── __forms.html         # Netlify Forms discovery
+├── .well-known/         # Apple App Site Association и Android asset links
 ├── og-main.png          # OG-картинка главной
 ├── og-tips.png          # OG-картинка tips
 └── tips-icons/          # Иконки для карточек tips
@@ -86,7 +131,7 @@ public/
 ## Локальная разработка
 
 ```sh
-git clone https://github.com/<your-org>/BunkerSite.git
+git clone https://github.com/Georgy-hook/bunker-board-site.git
 cd BunkerSite
 npm install
 npm run dev          # http://localhost:4321
@@ -106,3 +151,19 @@ Build command: `npm ci && npm run build`
 Publish directory: `dist`
 
 Сайт деплоится автоматически при пуше в основную ветку.
+
+## Git hygiene
+
+В git не должны попадать:
+
+- `dist/`, `.astro/`, `.netlify/`
+- `node_modules/`
+- `.env*`
+- локальные логи и IDE-файлы
+
+Перед коммитом полезно проверять:
+
+```sh
+git status --short --ignored
+npm run build
+```

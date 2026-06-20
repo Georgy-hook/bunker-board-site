@@ -4,16 +4,25 @@ import iosIcon from '../assets/ios-icon-logo.png';
 
 type HeaderLocale = 'en' | 'ru';
 
-interface Props {
-  locale?: HeaderLocale;
+interface LanguageLink {
+  locale: HeaderLocale;
+  href: string;
+  label: string;
+  flag: string;
 }
 
-const { locale = 'en' } = Astro.props;
+interface Props {
+  locale?: HeaderLocale;
+  languageLinks?: LanguageLink[];
+}
+
+const { locale = 'en', languageLinks = [] } = Astro.props;
 
 const labels: Record<HeaderLocale, {
   houseAlt: string;
   tips: string;
   tipsHref: string;
+  languageSwitcher: string;
   appStore: string;
   appStoreShort: string;
   appStoreAlt: string;
@@ -22,6 +31,7 @@ const labels: Record<HeaderLocale, {
     houseAlt: 'Vault House',
     tips: 'Tips',
     tipsHref: '/en/tips',
+    languageSwitcher: 'Choose language',
     appStore: 'Download on iOS',
     appStoreShort: 'iOS',
     appStoreAlt: 'iOS App Store',
@@ -30,6 +40,7 @@ const labels: Record<HeaderLocale, {
     houseAlt: 'Дом Vault',
     tips: 'Советы',
     tipsHref: '/tips',
+    languageSwitcher: 'Выбрать язык',
     appStore: 'Скачать на iOS',
     appStoreShort: 'iOS',
     appStoreAlt: 'iOS App Store',
@@ -56,6 +67,32 @@ const copy = labels[locale];
       >
         {copy.tips}
       </a>
+      {languageLinks.length > 1 && (
+        <div
+          role="group"
+          class="flex items-center rounded-full bg-white/15 p-0.5 shadow-md ring-1 ring-white/25"
+          aria-label={copy.languageSwitcher}
+        >
+          {languageLinks.map((language) => (
+            <a
+              href={language.href}
+              lang={language.locale}
+              title={language.label}
+              aria-label={language.label}
+              aria-current={language.locale === locale ? 'page' : undefined}
+              class:list={[
+                'flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full text-base sm:text-lg leading-none transition-all duration-200',
+                language.locale === locale
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-white hover:bg-white/20 hover:text-white',
+              ]}
+            >
+              <span aria-hidden="true">{language.flag}</span>
+              <span class="sr-only">{language.label}</span>
+            </a>
+          ))}
+        </div>
+      )}
       <a
         href="https://apps.apple.com/app/id6749825722"
         target="_blank"

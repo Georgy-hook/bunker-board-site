@@ -12,6 +12,20 @@ const { locale } = Astro.props;
 const page = tipsContentByLocale[locale];
 const localizedPages = Object.values(tipsContentByLocale);
 const alternatePages = localizedPages.filter((alternatePage) => alternatePage.locale !== page.locale);
+const languageLabels: Record<TipsLocale, string> = {
+  en: 'English',
+  ru: 'Русский',
+};
+const languageFlags: Record<TipsLocale, string> = {
+  en: '🇺🇸',
+  ru: '🇷🇺',
+};
+const languageLinks = localizedPages.map((localizedPage) => ({
+  locale: localizedPage.locale,
+  href: new URL(localizedPage.canonicalUrl).pathname,
+  label: languageLabels[localizedPage.locale],
+  flag: languageFlags[localizedPage.locale],
+}));
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -56,7 +70,7 @@ const getTitleClass = (kind: string) =>
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </Fragment>
 
-  <Header locale={page.locale} />
+  <Header locale={page.locale} languageLinks={languageLinks} />
 
   <main class="p-3 sm:p-4 lg:p-6">
     <article class="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-[1.25rem] sm:rounded-3xl p-5 sm:p-8 lg:p-12 shadow-xl">

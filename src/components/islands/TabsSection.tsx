@@ -7,7 +7,7 @@ import DescriptionTab from "./DescriptionTab";
 import PrivacyTab from "./PrivacyTab";
 import TermsTab from "./TermsTab";
 import SupportTab from "./SupportTab";
-import type { HomeTabId, HomeTabsContent } from "../../modules/content";
+import type { FeedbackFormKind, HomeTabId, HomeTabsContent, SiteLocale } from "../../modules/content";
 
 function imgSrc(img: string | { src: string }): string {
   return typeof img === "string" ? img : img.src;
@@ -15,6 +15,7 @@ function imgSrc(img: string | { src: string }): string {
 
 interface Props {
   content: HomeTabsContent;
+  locale: SiteLocale;
 }
 
 const tabIcons = {
@@ -26,9 +27,10 @@ const tabIcons = {
 
 const tabIds: HomeTabId[] = ["description", "privacy", "terms", "support"];
 
-export default function TabsSection({ content }: Props) {
+export default function TabsSection({ content, locale }: Props) {
   const [active, setActive] = useState<HomeTabId>("description");
   const [animKey, setAnimKey] = useState(0);
+  const [activeFeedbackForm, setActiveFeedbackForm] = useState<FeedbackFormKind | null>(null);
 
   const tabs = tabIds.map((id) => ({
     id,
@@ -42,11 +44,24 @@ export default function TabsSection({ content }: Props) {
     setAnimKey((k) => k + 1);
   };
 
+  const handleOpenFeedback = (form: FeedbackFormKind) => {
+    setActiveFeedbackForm(form);
+    setActive("support");
+    setAnimKey((k) => k + 1);
+  };
+
   const activeContent = {
-    description: <DescriptionTab content={content.description} />,
+    description: <DescriptionTab content={content.description} onOpenFeedback={handleOpenFeedback} />,
     privacy: <PrivacyTab content={content.privacy} />,
     terms: <TermsTab content={content.terms} />,
-    support: <SupportTab content={content.support} />,
+    support: (
+      <SupportTab
+        activeFeedbackForm={activeFeedbackForm}
+        content={content.support}
+        locale={locale}
+        onActiveFeedbackFormChange={setActiveFeedbackForm}
+      />
+    ),
   } satisfies Record<HomeTabId, React.ReactNode>;
 
   return (

@@ -19,14 +19,4 @@ export const externalLinks: ExternalLink[] = [
     url: 'https://t.me/+9r6mKQuDwtMxNzdi',
     color: 'blue',
   },
-  {
-    label: 'Report a Bug / Request a Feature',
-    url: 'https://docs.google.com/forms/d/e/1FAIpQLSdhBsAiVDsFjXHKlhsravX7DQwNWafxHgn_vISj7WkMWl7k0w/viewform?usp=dialog',
-    color: 'green',
-  },
-  {
-    label: 'Suggest Game Content',
-    url: 'https://docs.google.com/forms/d/17IeZPlwZYqihaaBet6IZVGyDgejLz8R5K9wiWVz8qTc/edit',
-    color: 'purple',
-  },
 ];

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Vault forms</title>
+  </head>
+  <body>
+    <form name="vault-bug-report" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="vault-bug-report" />
+      <input type="hidden" name="subject" value="Vault bug report" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="locale" />
+      <input type="text" name="page_url" />
+      <input type="email" name="contact_email" />
+      <input type="text" name="bug_area" />
+      <input type="text" name="bug_summary" />
+      <textarea name="bug_steps"></textarea>
+    </form>
+
+    <form name="vault-content-idea" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="vault-content-idea" />
+      <input type="hidden" name="subject" value="Vault content idea" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="locale" />
+      <input type="text" name="page_url" />
+      <input type="email" name="contact_email" />
+      <input type="text" name="idea_kind" />
+      <input type="text" name="characteristic_type" />
+      <input type="text" name="characteristic_content" />
+      <textarea name="cataclysm_description"></textarea>
+      <input type="text" name="bunker_feature_content" />
+      <input type="checkbox" name="bunker_effects" value="area_increase" />
+      <input type="checkbox" name="bunker_effects" value="area_decrease" />
+      <input type="checkbox" name="bunker_effects" value="food_increase" />
+      <input type="checkbox" name="bunker_effects" value="food_decrease" />
+      <input type="checkbox" name="bunker_effects" value="time_increase" />
+      <input type="checkbox" name="bunker_effects" value="time_decrease" />
+    </form>
+  </body>
+</html>

@@ -50,7 +50,7 @@ const alternatePages = localizedPages.filter((page) => page.locale !== locale);
   <Header locale={locale} languageLinks={languageLinks} />
   <main class="p-4 lg:p-6">
     <div class="max-w-6xl mx-auto">
-      <TabsSection content={content.tabs} client:visible />
+      <TabsSection content={content.tabs} locale={locale} client:visible />
     </div>
   </main>
   <Footer locale={locale} />

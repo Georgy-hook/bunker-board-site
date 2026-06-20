@@ -9,13 +9,10 @@ import bugIcon from "../../assets/bug-icon.png";
 import suggestIcon from "../../assets/suggest-icon.png";
 import {
   contact,
-  externalLinks,
   siteConfig,
+  type FeedbackFormKind,
   type HomeDescriptionContent,
 } from "../../modules/content";
-
-const reportBugUrl = externalLinks.find((link) => link.label.startsWith("Report"))?.url ?? "#";
-const suggestContentUrl = externalLinks.find((link) => link.label.startsWith("Suggest"))?.url ?? "#";
 
 function imgSrc(img: string | { src: string }): string {
   return typeof img === "string" ? img : img.src;
@@ -23,9 +20,10 @@ function imgSrc(img: string | { src: string }): string {
 
 interface Props {
   content: HomeDescriptionContent;
+  onOpenFeedback?: (form: FeedbackFormKind) => void;
 }
 
-export default function DescriptionTab({ content }: Props) {
+export default function DescriptionTab({ content, onOpenFeedback }: Props) {
   return (
     <div className="bg-white/95 backdrop-blur-sm rounded-3xl overflow-visible card-animated tab-content-enter">
       <div className="p-6 sm:p-8 lg:p-12">
@@ -103,24 +101,22 @@ export default function DescriptionTab({ content }: Props) {
               <img src={imgSrc(telegramIcon)} alt={content.telegramAlt} className="w-5 h-5 object-contain" />
               {content.telegramLabel}
             </a>
-            <a
-              href={reportBugUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => onOpenFeedback?.("bug")}
               className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white rounded-full px-5 py-2 shadow-md btn-animated text-sm sm:text-base"
             >
               <img src={imgSrc(bugIcon)} alt={content.reportBugAlt} className="w-5 h-5 object-contain" />
               {content.reportBugLabel}
-            </a>
-            <a
-              href={suggestContentUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            </button>
+            <button
+              type="button"
+              onClick={() => onOpenFeedback?.("idea")}
               className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white rounded-full px-5 py-2 shadow-md btn-animated text-sm sm:text-base"
             >
               <img src={imgSrc(suggestIcon)} alt={content.suggestContentAlt} className="w-5 h-5 object-contain" />
               {content.suggestContentLabel}
-            </a>
+            </button>
           </div>
 
         </div>

@@ -81,9 +81,9 @@ Release reminder:
 
 | Слой | Технология |
 |------|-----------|
-| Фреймворк | [Astro 5](https://astro.build/) (static output) |
+| Фреймворк | [Astro 6](https://astro.build/) (static output) |
 | Интерактив | React 18 (Astro islands) |
-| Стили | Tailwind CSS 3 + кастомный шрифт Classic Comic |
+| Стили | Tailwind CSS 3 через PostCSS + кастомный шрифт Classic Comic |
 | Деплой | Netlify (static hosting) |
 | Sitemap | `@astrojs/sitemap` |
 

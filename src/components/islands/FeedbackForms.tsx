@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   Bug,
+  ChevronDown,
   CheckCircle2,
   ChevronRight,
   CloudLightning,
@@ -66,10 +67,18 @@ function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
 
 async function submitNetlifyForm(form: HTMLFormElement) {
   const formData = new FormData(form);
+  const payload = new URLSearchParams();
+
+  formData.forEach((value, key) => {
+    if (typeof value === "string") {
+      payload.append(key, value);
+    }
+  });
+
   const response = await fetch("/__forms.html", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
+    body: payload.toString(),
   });
 
   if (!response.ok) {
@@ -311,17 +320,20 @@ export default function FeedbackForms({ locale, activeForm, onActiveFormChange }
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
                     <FieldLabel>{content.characteristicTypeLabel}</FieldLabel>
-                    <select
-                      name="characteristic_type"
-                      required
-                      className="w-full rounded-2xl border border-orange-100 bg-white px-4 py-3 text-sm font-semibold text-gray-900 shadow-sm outline-none transition-all duration-200 focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-                    >
-                      {content.characteristicOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="relative">
+                      <select
+                        name="characteristic_type"
+                        required
+                        className="h-12 w-full appearance-none rounded-2xl border border-orange-100 bg-white px-4 py-3 pr-10 text-sm font-semibold text-gray-900 shadow-sm outline-none transition-all duration-200 focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
+                      >
+                        {content.characteristicOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+                    </div>
                   </div>
                   <div>
                     <FieldLabel>{content.characteristicContentLabel}</FieldLabel>

@@ -284,7 +284,7 @@ export const siteContentByLocale = {
       appStoreAlt: 'iOS App Store',
     },
     footer: {
-      copyright: '© 2025 Vault. Pavlina Gluhova. 無断転載を禁じます。',
+      copyright: '© 2025 Vault. Pavlina Gluhova. All rights reserved.',
     },
     tabs: {
       ariaLabel: 'Vault content',
@@ -1298,7 +1298,7 @@ export const siteContentByLocale = {
       appStoreAlt: 'iOS App Store',
     },
     footer: {
-      copyright: '© 2025 Vault. Pavlina Gluhova. 모든 권리 보유.',
+      copyright: '© 2025 Vault. Pavlina Gluhova. 無断転載を禁じます。',
     },
     tabs: {
       ariaLabel: 'Vaultのコンテンツ',
@@ -1467,7 +1467,7 @@ export const siteContentByLocale = {
       appStoreAlt: 'iOS App Store',
     },
     footer: {
-      copyright: '© 2025 Vault. Pavlina Gluhova. 保留所有权利。',
+      copyright: '© 2025 Vault. Pavlina Gluhova. 모든 권리 보유.',
     },
     tabs: {
       ariaLabel: 'Vault 콘텐츠',
@@ -1974,7 +1974,7 @@ export const siteContentByLocale = {
       appStoreAlt: 'iOS App Store',
     },
     footer: {
-      copyright: '© 2025 Vault. Pavlina Gluhova. All rights reserved.',
+      copyright: '© 2025 Vault. Pavlina Gluhova. 保留所有权利。',
     },
     tabs: {
       ariaLabel: 'Vault 内容',

@@ -22,7 +22,7 @@ export interface ExternalLink {
   color: string;
 }
 
-export type TipsLocale = 'ru';
+export type TipsLocale = 'ru' | 'en';
 
 export interface TipsQuickTip {
   icon: string;

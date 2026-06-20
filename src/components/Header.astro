@@ -13,6 +13,7 @@ const { locale = 'en' } = Astro.props;
 const labels: Record<HeaderLocale, {
   houseAlt: string;
   tips: string;
+  tipsHref: string;
   appStore: string;
   appStoreShort: string;
   appStoreAlt: string;
@@ -20,6 +21,7 @@ const labels: Record<HeaderLocale, {
   en: {
     houseAlt: 'Vault House',
     tips: 'Tips',
+    tipsHref: '/en/tips',
     appStore: 'Download on iOS',
     appStoreShort: 'iOS',
     appStoreAlt: 'iOS App Store',
@@ -27,6 +29,7 @@ const labels: Record<HeaderLocale, {
   ru: {
     houseAlt: 'Дом Vault',
     tips: 'Советы',
+    tipsHref: '/tips',
     appStore: 'Скачать на iOS',
     appStoreShort: 'iOS',
     appStoreAlt: 'iOS App Store',
@@ -48,7 +51,7 @@ const copy = labels[locale];
     </a>
     <nav class="flex items-center gap-1.5 sm:gap-4">
       <a
-        href="/tips"
+        href={copy.tipsHref}
         class="text-white/90 hover:text-white text-xs sm:text-base lg:text-lg font-medium transition-colors"
       >
         {copy.tips}

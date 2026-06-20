@@ -119,11 +119,12 @@ export default function FeedbackForms({ locale, activeForm, onActiveFormChange }
 
   const handleBugSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
     setBugState("submitting");
 
     try {
-      await submitNetlifyForm(event.currentTarget);
-      event.currentTarget.reset();
+      await submitNetlifyForm(form);
+      form.reset();
       setBugState("success");
     } catch {
       setBugState("error");
@@ -132,6 +133,7 @@ export default function FeedbackForms({ locale, activeForm, onActiveFormChange }
 
   const handleIdeaSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
     setIdeaError("");
 
     if (activeIdeaKind === "bunker-feature" && selectedEffects.length === 0) {
@@ -142,8 +144,8 @@ export default function FeedbackForms({ locale, activeForm, onActiveFormChange }
     setIdeaState("submitting");
 
     try {
-      await submitNetlifyForm(event.currentTarget);
-      event.currentTarget.reset();
+      await submitNetlifyForm(form);
+      form.reset();
       setSelectedEffects([]);
       setIdeaState("success");
     } catch {

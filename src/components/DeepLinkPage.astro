@@ -1,0 +1,80 @@
+---
+import bunkerLogo from '../assets/af3b0ac35568f0c21ec86e6301202642d53c9127.png';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from './Footer.astro';
+import Header from './Header.astro';
+import {
+  absoluteUrl,
+  defaultLocale,
+  getAlternatePages,
+  getHomePath,
+  getLanguageLinks,
+  getLocalizedPath,
+  localeMeta,
+  siteContentByLocale,
+  type DeepLinkRoute,
+  type SiteLocale,
+} from '../modules/content';
+
+interface Props {
+  locale: SiteLocale;
+  route: DeepLinkRoute;
+}
+
+const { locale, route } = Astro.props;
+const page = siteContentByLocale[locale].deepLinks[route];
+const canonicalUrl = absoluteUrl(getLocalizedPath(locale, route));
+const languageLinks = getLanguageLinks(route);
+const localizedPages = getAlternatePages(route);
+const alternatePages = localizedPages.filter((alternatePage) => alternatePage.locale !== locale);
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  ogTitle={page.title}
+  ogDescription={page.description}
+  ogImage="/og-main.png"
+  ogImageAlt={page.logoAlt}
+  canonicalUrl={canonicalUrl}
+  lang={localeMeta[locale].htmlLang}
+>
+  <Fragment slot="head">
+    <meta property="og:locale" content={localeMeta[locale].ogLocale} />
+    {alternatePages.map((alternatePage) => (
+      <meta property="og:locale:alternate" content={alternatePage.ogLocale} />
+    ))}
+    {localizedPages.map((localizedPage) => (
+      <link rel="alternate" hreflang={localizedPage.htmlLang} href={localizedPage.url} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={absoluteUrl(getLocalizedPath(defaultLocale, route))} />
+  </Fragment>
+
+  <Header locale={locale} languageLinks={languageLinks} />
+  <main class="flex min-h-[calc(100vh-14rem)] items-center justify-center px-4 py-10 sm:py-14">
+    <div class="w-full max-w-xl bg-white/85 backdrop-blur-md rounded-3xl shadow-2xl px-6 py-10 sm:px-10 sm:py-14 text-center">
+      <div class="flex justify-center mb-8">
+        <img
+          src={bunkerLogo.src}
+          alt={page.logoAlt}
+          class="h-24 w-auto sm:h-28 drop-shadow-xl"
+          width={bunkerLogo.width}
+          height={bunkerLogo.height}
+        />
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+        {page.heading}
+      </h1>
+      <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
+        {page.text}
+      </p>
+      <a
+        href={getHomePath(locale)}
+        class="mt-8 inline-flex items-center justify-center rounded-full bg-orange-600 px-6 py-3 text-base font-semibold text-white shadow-lg transition-colors hover:bg-orange-700"
+      >
+        Vault
+      </a>
+    </div>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

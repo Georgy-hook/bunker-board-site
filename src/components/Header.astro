@@ -1,59 +1,36 @@
 ---
 import houseIcon from '../assets/114ebae2afe3a8a82f1ffeca9290fb1759e0ab3a.png';
 import iosIcon from '../assets/ios-icon-logo.png';
-import { siteConfig } from '../modules/content';
-
-type HeaderLocale = 'en' | 'ru';
+import {
+  getHomePath,
+  getTipsPath,
+  localeMeta,
+  siteConfig,
+  siteContentByLocale,
+  type SiteLocale,
+} from '../modules/content';
 
 interface LanguageLink {
-  locale: HeaderLocale;
+  locale: SiteLocale;
   href: string;
   label: string;
   flag: string;
 }
 
 interface Props {
-  locale?: HeaderLocale;
+  locale?: SiteLocale;
   languageLinks?: LanguageLink[];
 }
 
 const { locale = 'en', languageLinks = [] } = Astro.props;
-
-const labels: Record<HeaderLocale, {
-  houseAlt: string;
-  tips: string;
-  tipsHref: string;
-  languageSwitcher: string;
-  appStore: string;
-  appStoreShort: string;
-  appStoreAlt: string;
-}> = {
-  en: {
-    houseAlt: 'Vault House',
-    tips: 'Tips',
-    tipsHref: '/en/tips/',
-    languageSwitcher: 'Choose language',
-    appStore: 'Download on iOS',
-    appStoreShort: 'iOS',
-    appStoreAlt: 'iOS App Store',
-  },
-  ru: {
-    houseAlt: 'Дом Vault',
-    tips: 'Советы',
-    tipsHref: '/tips/',
-    languageSwitcher: 'Выбрать язык',
-    appStore: 'Скачать на iOS',
-    appStoreShort: 'iOS',
-    appStoreAlt: 'iOS App Store',
-  },
-};
-
-const copy = labels[locale];
+const copy = siteContentByLocale[locale].header;
+const homeHref = getHomePath(locale);
+const tipsHref = getTipsPath(locale);
 ---
 
 <header class="p-4 lg:p-6">
   <div class="max-w-6xl mx-auto flex items-center justify-between gap-2 sm:gap-3">
-    <a href="/" class="text-2xl sm:text-4xl lg:text-5xl text-white drop-shadow-lg flex items-center gap-1.5 sm:gap-3 no-underline flex-shrink-0">
+    <a href={homeHref} class="text-2xl sm:text-4xl lg:text-5xl text-white drop-shadow-lg flex items-center gap-1.5 sm:gap-3 no-underline flex-shrink-0">
       <img
         src={houseIcon.src}
         alt={copy.houseAlt}
@@ -63,7 +40,7 @@ const copy = labels[locale];
     </a>
     <nav class="flex items-center gap-1.5 sm:gap-4">
       <a
-        href={copy.tipsHref}
+        href={tipsHref}
         class="text-white/90 hover:text-white text-xs sm:text-base lg:text-lg font-medium transition-colors"
       >
         {copy.tips}
@@ -77,7 +54,7 @@ const copy = labels[locale];
           {languageLinks.map((language) => (
             <a
               href={language.href}
-              lang={language.locale}
+              lang={localeMeta[language.locale].htmlLang}
               title={language.label}
               aria-label={language.label}
               aria-current={language.locale === locale ? 'page' : undefined}

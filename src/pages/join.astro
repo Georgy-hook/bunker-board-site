@@ -1,26 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import bunkerLogo from '../assets/af3b0ac35568f0c21ec86e6301202642d53c9127.png';
+import DeepLinkPage from '../components/DeepLinkPage.astro';
 ---
 
-<BaseLayout title="Join Session — Vault">
-  <div class="min-h-screen flex items-center justify-center px-4 py-16">
-    <div class="w-full max-w-xl bg-white/85 backdrop-blur-md rounded-3xl shadow-2xl px-6 py-10 sm:px-10 sm:py-14 text-center">
-      <div class="flex justify-center mb-8">
-        <img
-          src={bunkerLogo.src}
-          alt="Vault Logo"
-          class="h-24 w-auto sm:h-28 drop-shadow-xl"
-          width={bunkerLogo.width}
-          height={bunkerLogo.height}
-        />
-      </div>
-      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-        Joining the Session
-      </h1>
-      <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
-        To join, click Open App in your browser's pop-up bar. If nothing appears, try a different browser or refresh the page.
-      </p>
-    </div>
-  </div>
-</BaseLayout>
+<DeepLinkPage locale="en" route="join" />

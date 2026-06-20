@@ -1,24 +1,18 @@
 ---
-import { siteConfig } from '../modules/content';
-
-type FooterLocale = 'en' | 'ru';
+import { siteContentByLocale, type SiteLocale } from '../modules/content';
 
 interface Props {
-  locale?: FooterLocale;
+  locale?: SiteLocale;
 }
 
 const { locale = 'en' } = Astro.props;
-
-const copyrightByLocale: Record<FooterLocale, string> = {
-  en: siteConfig.copyright,
-  ru: '© 2025 Vault. Pavlina Gluhova. Все права защищены.',
-};
+const copy = siteContentByLocale[locale].footer;
 ---
 
 <footer class="p-6 mt-12">
   <div class="max-w-6xl mx-auto text-center">
     <p class="text-white/90 drop-shadow-md">
-      {copyrightByLocale[locale]}
+      {copy.copyright}
     </p>
   </div>
 </footer>

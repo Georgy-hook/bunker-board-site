@@ -1,3 +1,5 @@
+import type { SiteLocale } from './i18n';
+
 export interface PageMeta {
   title: string;
   description: string;
@@ -22,7 +24,7 @@ export interface ExternalLink {
   color: string;
 }
 
-export type TipsLocale = 'ru' | 'en';
+export type TipsLocale = SiteLocale;
 
 export interface TipsQuickTip {
   icon: string;

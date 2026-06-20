@@ -1,0 +1,21 @@
+---
+import TipsPage from '../../components/TipsPage.astro';
+import { siteLocales, type SiteLocale } from '../../modules/content';
+
+export function getStaticPaths() {
+  return siteLocales
+    .filter((locale) => locale !== 'ru')
+    .map((locale) => ({
+      params: { locale },
+      props: { locale },
+    }));
+}
+
+interface Props {
+  locale: SiteLocale;
+}
+
+const { locale } = Astro.props;
+---
+
+<TipsPage locale={locale} />

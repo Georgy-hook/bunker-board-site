@@ -7,7 +7,12 @@ import backpackIcon from "../../assets/backpack-icon.png";
 import telegramIcon from "../../assets/telegram-icon.png";
 import bugIcon from "../../assets/bug-icon.png";
 import suggestIcon from "../../assets/suggest-icon.png";
-import { contact, externalLinks, siteConfig } from "../../modules/content";
+import {
+  contact,
+  externalLinks,
+  siteConfig,
+  type HomeDescriptionContent,
+} from "../../modules/content";
 
 const reportBugUrl = externalLinks.find((link) => link.label.startsWith("Report"))?.url ?? "#";
 const suggestContentUrl = externalLinks.find((link) => link.label.startsWith("Suggest"))?.url ?? "#";
@@ -16,7 +21,11 @@ function imgSrc(img: string | { src: string }): string {
   return typeof img === "string" ? img : img.src;
 }
 
-export default function DescriptionTab() {
+interface Props {
+  content: HomeDescriptionContent;
+}
+
+export default function DescriptionTab({ content }: Props) {
   return (
     <div className="bg-white/95 backdrop-blur-sm rounded-3xl overflow-visible card-animated tab-content-enter">
       <div className="p-6 sm:p-8 lg:p-12">
@@ -28,7 +37,7 @@ export default function DescriptionTab() {
             {/* Main logo */}
             <img
               src={imgSrc(bunkerLogo)}
-              alt="Vault Logo"
+              alt={content.logoAlt}
               className="relative z-[1] mx-auto h-auto drop-shadow-2xl scale-in"
               style={{ width: "clamp(8rem, 40vw, 28rem)" }}
             />
@@ -38,7 +47,7 @@ export default function DescriptionTab() {
               className="absolute left-0 sm:left-4 top-0 z-[2] sticker sticker-float pointer-events-none"
               style={{ "--sticker-rotate": "12deg" } as React.CSSProperties}
             >
-              <img src={imgSrc(dogIcon)} alt="Dog character" className="big-sticker object-contain" />
+              <img src={imgSrc(dogIcon)} alt={content.dogAlt} className="big-sticker object-contain" />
             </div>
 
             {/* Right character sticker */}
@@ -46,28 +55,28 @@ export default function DescriptionTab() {
               className="absolute right-0 sm:right-4 top-0 z-[2] sticker sticker-float-alt pointer-events-none"
               style={{ "--sticker-rotate": "-12deg" } as React.CSSProperties}
             >
-              <img src={imgSrc(characterImage2)} alt="Character" className="big-sticker object-contain" />
+              <img src={imgSrc(characterImage2)} alt={content.characterAlt} className="big-sticker object-contain" />
             </div>
 
             {/* Bottom left small sticker */}
             <div className="absolute left-[20%] sm:left-1/4 bottom-0 sm:-bottom-2 z-[2] sticker sticker-float-slow pointer-events-none">
-              <img src={imgSrc(fishIcon)} alt="Mutant fish" className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
+              <img src={imgSrc(fishIcon)} alt={content.fishAlt} className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
             </div>
 
             {/* Bottom right small sticker */}
             <div className="absolute right-[20%] sm:right-1/4 bottom-0 sm:-bottom-2 z-[2] sticker sticker-float-slow pointer-events-none" style={{ animationDelay: "1.2s" }}>
-              <img src={imgSrc(backpackIcon)} alt="Backpack" className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
+              <img src={imgSrc(backpackIcon)} alt={content.backpackAlt} className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
             </div>
           </div>
 
           {/* Title */}
           <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-4 sm:mb-6 text-gray-800 fade-in-up stagger-1">
-            Vault - Survive the Debate
+            {content.title}
           </h2>
 
           {/* Description */}
           <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-gray-700 max-w-4xl mx-auto mb-6 sm:mb-8 fade-in-up stagger-2">
-            Vault is a fast, social survival debate for 4-12 players. Spin up a session, share a join code, and jump into an evolving apocalypse with a living bunker: capacity, area, time left, food reserves, and cozy-factor all shift as events unfold. Every player brings a unique mix of traits &mdash; Bio, Conditions, Body Type, Personality, Hobby, Phobia, Knowledge, Backpack, and Extra Info &mdash; plus an always-visible Profession. Reveal strengths, craft your pitch, and convince the group you're essential. Build the ultimate team or get left outside.
+            {content.body}
           </p>
 
           {/* Primary CTA */}
@@ -78,8 +87,8 @@ export default function DescriptionTab() {
               rel="noopener noreferrer"
               className="ios-cta inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg btn-animated btn-cta"
             >
-              <img src={imgSrc(iosLogo)} alt="iOS Logo" />
-              Get the iOS App
+              <img src={imgSrc(iosLogo)} alt={content.primaryCtaAlt} />
+              {content.primaryCta}
             </a>
           </div>
 
@@ -91,8 +100,8 @@ export default function DescriptionTab() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full px-5 py-2 shadow-md btn-animated text-sm sm:text-base"
             >
-              <img src={imgSrc(telegramIcon)} alt="Telegram" className="w-5 h-5 object-contain" />
-              Telegram channel
+              <img src={imgSrc(telegramIcon)} alt={content.telegramAlt} className="w-5 h-5 object-contain" />
+              {content.telegramLabel}
             </a>
             <a
               href={reportBugUrl}
@@ -100,8 +109,8 @@ export default function DescriptionTab() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white rounded-full px-5 py-2 shadow-md btn-animated text-sm sm:text-base"
             >
-              <img src={imgSrc(bugIcon)} alt="Bug Report" className="w-5 h-5 object-contain" />
-              Report a bug
+              <img src={imgSrc(bugIcon)} alt={content.reportBugAlt} className="w-5 h-5 object-contain" />
+              {content.reportBugLabel}
             </a>
             <a
               href={suggestContentUrl}
@@ -109,8 +118,8 @@ export default function DescriptionTab() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white rounded-full px-5 py-2 shadow-md btn-animated text-sm sm:text-base"
             >
-              <img src={imgSrc(suggestIcon)} alt="Suggest Content" className="w-5 h-5 object-contain" />
-              Suggest content
+              <img src={imgSrc(suggestIcon)} alt={content.suggestContentAlt} className="w-5 h-5 object-contain" />
+              {content.suggestContentLabel}
             </a>
           </div>
 

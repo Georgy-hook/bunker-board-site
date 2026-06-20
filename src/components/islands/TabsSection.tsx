@@ -7,45 +7,59 @@ import DescriptionTab from "./DescriptionTab";
 import PrivacyTab from "./PrivacyTab";
 import TermsTab from "./TermsTab";
 import SupportTab from "./SupportTab";
+import type { HomeTabId, HomeTabsContent } from "../../modules/content";
 
 function imgSrc(img: string | { src: string }): string {
   return typeof img === "string" ? img : img.src;
 }
 
-const tabs = [
-  { id: "description", label: "Description", icon: descriptionIcon },
-  { id: "privacy", label: "Privacy Policy", icon: privacyIcon },
-  { id: "terms", label: "Terms of Service", icon: termsIcon },
-  { id: "support", label: "Support", icon: supportIcon },
-] as const;
+interface Props {
+  content: HomeTabsContent;
+}
 
-type TabId = (typeof tabs)[number]["id"];
+const tabIcons = {
+  description: descriptionIcon,
+  privacy: privacyIcon,
+  terms: termsIcon,
+  support: supportIcon,
+} satisfies Record<HomeTabId, string | { src: string }>;
 
-const tabContent: Record<TabId, React.FC> = {
-  description: DescriptionTab,
-  privacy: PrivacyTab,
-  terms: TermsTab,
-  support: SupportTab,
-};
+const tabIds: HomeTabId[] = ["description", "privacy", "terms", "support"];
 
-export default function TabsSection() {
-  const [active, setActive] = useState<TabId>("description");
+export default function TabsSection({ content }: Props) {
+  const [active, setActive] = useState<HomeTabId>("description");
   const [animKey, setAnimKey] = useState(0);
-  const ActiveContent = tabContent[active];
 
-  const handleTab = (id: TabId) => {
+  const tabs = tabIds.map((id) => ({
+    id,
+    label: content.labels[id],
+    icon: tabIcons[id],
+  }));
+
+  const handleTab = (id: HomeTabId) => {
     if (id === active) return;
     setActive(id);
     setAnimKey((k) => k + 1);
   };
 
+  const activeContent = {
+    description: <DescriptionTab content={content.description} />,
+    privacy: <PrivacyTab content={content.privacy} />,
+    terms: <TermsTab content={content.terms} />,
+    support: <SupportTab content={content.support} />,
+  } satisfies Record<HomeTabId, React.ReactNode>;
+
   return (
     <div className="w-full fade-in-up">
-      <nav className="grid w-full grid-cols-2 lg:grid-cols-4 mb-6 sm:mb-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-md p-1.5 gap-1.5">
+      <nav
+        aria-label={content.ariaLabel}
+        className="grid w-full grid-cols-2 lg:grid-cols-4 mb-6 sm:mb-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-md p-1.5 gap-1.5"
+      >
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => handleTab(tab.id)}
+            type="button"
             className={`flex items-center justify-center text-xs sm:text-sm lg:text-base gap-1.5 sm:gap-2 px-2 sm:px-3 py-2.5 sm:py-3 rounded-xl font-medium transition-all duration-200 ${
               active === tab.id
                 ? "bg-orange-500 text-white shadow-md scale-[1.02]"
@@ -59,7 +73,7 @@ export default function TabsSection() {
       </nav>
 
       <div key={animKey}>
-        <ActiveContent />
+        {activeContent[active]}
       </div>
     </div>
   );

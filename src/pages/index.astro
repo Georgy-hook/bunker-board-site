@@ -1,24 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import TabsSection from '../components/islands/TabsSection';
+import HomePage from '../components/HomePage.astro';
 ---
 
-<BaseLayout
-  title="Vault — Survive the Debate"
-  description="Vault is a fast social survival debate game for 4-12 players on iOS."
-  ogTitle="Vault — Survive the Debate"
-  ogDescription="Spin up a bunker session, reveal your traits, and convince the group you deserve to survive."
-  ogImage="/og-main.png"
-  ogImageAlt="Vault — Survive the Debate"
-  canonicalUrl="https://vaultgame.app/"
->
-  <Header />
-  <main class="p-4 lg:p-6">
-    <div class="max-w-6xl mx-auto">
-      <TabsSection client:visible />
-    </div>
-  </main>
-  <Footer />
-</BaseLayout>
+<HomePage locale="en" />

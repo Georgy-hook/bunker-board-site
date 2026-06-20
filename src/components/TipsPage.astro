@@ -2,7 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
-import { tipsContentByLocale, type TipsLocale } from '../modules/content';
+import {
+  absoluteUrl,
+  defaultLocale,
+  getAlternatePages,
+  getLanguageLinks,
+  getTipsPath,
+  tipsContentByLocale,
+  type TipsLocale,
+} from '../modules/content';
 
 interface Props {
   locale: TipsLocale;
@@ -10,22 +18,9 @@ interface Props {
 
 const { locale } = Astro.props;
 const page = tipsContentByLocale[locale];
-const localizedPages = Object.values(tipsContentByLocale);
+const localizedPages = getAlternatePages('tips');
 const alternatePages = localizedPages.filter((alternatePage) => alternatePage.locale !== page.locale);
-const languageLabels: Record<TipsLocale, string> = {
-  en: 'English',
-  ru: 'Русский',
-};
-const languageFlags: Record<TipsLocale, string> = {
-  en: '🇺🇸',
-  ru: '🇷🇺',
-};
-const languageLinks = localizedPages.map((localizedPage) => ({
-  locale: localizedPage.locale,
-  href: new URL(localizedPage.canonicalUrl).pathname,
-  label: languageLabels[localizedPage.locale],
-  flag: languageFlags[localizedPage.locale],
-}));
+const languageLinks = getLanguageLinks('tips');
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -64,9 +59,9 @@ const getTitleClass = (kind: string) =>
       <meta property="og:locale:alternate" content={alternatePage.ogLocale} />
     ))}
     {localizedPages.map((localizedPage) => (
-      <link rel="alternate" hreflang={localizedPage.htmlLang} href={localizedPage.canonicalUrl} />
+      <link rel="alternate" hreflang={localizedPage.htmlLang} href={localizedPage.url} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={tipsContentByLocale.en.canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={absoluteUrl(getTipsPath(defaultLocale))} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </Fragment>
 

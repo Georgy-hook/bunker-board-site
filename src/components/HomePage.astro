@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import TabsSection from './islands/TabsSection';
+import {
+  absoluteUrl,
+  defaultLocale,
+  getAlternatePages,
+  getHomePath,
+  getLanguageLinks,
+  localeMeta,
+  siteContentByLocale,
+  type SiteLocale,
+} from '../modules/content';
+
+interface Props {
+  locale: SiteLocale;
+}
+
+const { locale } = Astro.props;
+const content = siteContentByLocale[locale];
+const canonicalUrl = absoluteUrl(getHomePath(locale));
+const languageLinks = getLanguageLinks('home');
+const localizedPages = getAlternatePages('home');
+const alternatePages = localizedPages.filter((page) => page.locale !== locale);
+---
+
+<BaseLayout
+  title={content.meta.title}
+  description={content.meta.description}
+  ogTitle={content.meta.ogTitle}
+  ogDescription={content.meta.ogDescription}
+  ogImage="/og-main.png"
+  ogImageAlt={content.meta.ogImageAlt}
+  canonicalUrl={canonicalUrl}
+  lang={localeMeta[locale].htmlLang}
+>
+  <Fragment slot="head">
+    <meta property="og:locale" content={localeMeta[locale].ogLocale} />
+    {alternatePages.map((alternatePage) => (
+      <meta property="og:locale:alternate" content={alternatePage.ogLocale} />
+    ))}
+    {localizedPages.map((localizedPage) => (
+      <link rel="alternate" hreflang={localizedPage.htmlLang} href={localizedPage.url} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={absoluteUrl(getHomePath(defaultLocale))} />
+  </Fragment>
+
+  <Header locale={locale} languageLinks={languageLinks} />
+  <main class="p-4 lg:p-6">
+    <div class="max-w-6xl mx-auto">
+      <TabsSection content={content.tabs} client:visible />
+    </div>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

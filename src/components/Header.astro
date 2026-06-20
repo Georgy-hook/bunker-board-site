@@ -26,6 +26,13 @@ const { locale = 'en', languageLinks = [] } = Astro.props;
 const copy = siteContentByLocale[locale].header;
 const homeHref = getHomePath(locale);
 const tipsHref = getTipsPath(locale);
+const currentLanguage =
+  languageLinks.find((language) => language.locale === locale) ?? {
+    locale,
+    href: homeHref,
+    label: localeMeta[locale].label,
+    flag: localeMeta[locale].flag,
+  };
 ---
 
 <header class="p-4 lg:p-6">
@@ -41,35 +48,46 @@ const tipsHref = getTipsPath(locale);
     <nav class="flex items-center gap-1.5 sm:gap-4">
       <a
         href={tipsHref}
-        class="text-white/90 hover:text-white text-xs sm:text-base lg:text-lg font-medium transition-colors"
+        class="inline-flex h-9 sm:h-10 items-center justify-center rounded-full bg-white px-3 sm:px-4 text-xs sm:text-sm lg:text-base font-bold text-orange-700 shadow-md ring-1 ring-white/70 transition-all duration-200 hover:bg-orange-50 hover:text-orange-800 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-orange-500"
       >
         {copy.tips}
       </a>
       {languageLinks.length > 1 && (
-        <div
-          role="group"
-          class="flex items-center rounded-full bg-white/15 p-0.5 shadow-md ring-1 ring-white/25"
-          aria-label={copy.languageSwitcher}
-        >
-          {languageLinks.map((language) => (
-            <a
-              href={language.href}
-              lang={localeMeta[language.locale].htmlLang}
-              title={language.label}
-              aria-label={language.label}
-              aria-current={language.locale === locale ? 'page' : undefined}
-              class:list={[
-                'flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full text-base sm:text-lg leading-none transition-all duration-200',
-                language.locale === locale
-                  ? 'bg-white text-gray-900 shadow-sm'
-                  : 'text-white hover:bg-white/20 hover:text-white',
-              ]}
-            >
-              <span aria-hidden="true">{language.flag}</span>
-              <span class="sr-only">{language.label}</span>
-            </a>
-          ))}
-        </div>
+        <details class="group relative">
+          <summary
+            class="flex h-9 sm:h-10 cursor-pointer list-none items-center gap-1.5 rounded-full bg-white/95 px-2.5 sm:px-3 text-gray-900 shadow-md ring-1 ring-white/60 transition-all duration-200 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-orange-500 [&::-webkit-details-marker]:hidden"
+            aria-label={copy.languageSwitcher}
+            title={copy.languageSwitcher}
+          >
+            <span class="text-base sm:text-lg leading-none" aria-hidden="true">{currentLanguage.flag}</span>
+            <span class="hidden sm:inline text-xs font-bold uppercase tracking-wide">{currentLanguage.locale}</span>
+            <span class="text-[0.65rem] leading-none text-gray-500 transition-transform duration-200 group-open:rotate-180" aria-hidden="true">
+              ▼
+            </span>
+            <span class="sr-only">{currentLanguage.label}</span>
+          </summary>
+          <div class="absolute right-0 z-50 mt-2 w-56 max-h-[70vh] overflow-y-auto rounded-2xl bg-white/95 p-2 text-gray-900 shadow-2xl ring-1 ring-black/10 backdrop-blur">
+            {languageLinks.map((language) => (
+              <a
+                href={language.href}
+                lang={localeMeta[language.locale].htmlLang}
+                title={language.label}
+                aria-label={language.label}
+                aria-current={language.locale === locale ? 'page' : undefined}
+                class:list={[
+                  'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors duration-150',
+                  language.locale === locale
+                    ? 'bg-orange-100 text-orange-800'
+                    : 'text-gray-700 hover:bg-orange-50 hover:text-orange-800',
+                ]}
+              >
+                <span class="text-lg leading-none" aria-hidden="true">{language.flag}</span>
+                <span class="min-w-0 flex-1 truncate">{language.label}</span>
+                <span class="text-[0.65rem] font-bold uppercase text-gray-400">{language.locale}</span>
+              </a>
+            ))}
+          </div>
+        </details>
       )}
       <a
         href={siteConfig.appStoreUrl}

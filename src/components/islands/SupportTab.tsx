@@ -2,6 +2,10 @@ import telegramIcon from "../../assets/telegram-icon.png";
 import bugIcon from "../../assets/bug-icon.png";
 import suggestIcon from "../../assets/suggest-icon.png";
 import clockIcon from "../../assets/clock-icon.png";
+import { contact, externalLinks } from "../../modules/content";
+
+const reportBugUrl = externalLinks.find((link) => link.label.startsWith("Report"))?.url ?? "#";
+const suggestContentUrl = externalLinks.find((link) => link.label.startsWith("Suggest"))?.url ?? "#";
 
 function imgSrc(img: string | { src: string }): string {
   return typeof img === "string" ? img : img.src;
@@ -20,14 +24,14 @@ export default function SupportTab() {
                 <h3 className="text-lg sm:text-xl mb-4">Contact Information</h3>
                 <p className="mb-2 text-sm sm:text-base">
                   <strong>Email:</strong>
-                  <a href="mailto:georgin2000155@gmail.com" className="text-orange-600 hover:text-orange-700 ml-2 break-all">
-                    georgin2000155@gmail.com
+                  <a href={`mailto:${contact.email}`} className="text-orange-600 hover:text-orange-700 ml-2 break-all">
+                    {contact.email}
                   </a>
                 </p>
                 <p className="text-sm sm:text-base">
                   <strong>Phone:</strong>
-                  <a href="tel:+79295833289" className="text-orange-600 hover:text-orange-700 ml-2">
-                    +79295833289
+                  <a href={`tel:${contact.phone}`} className="text-orange-600 hover:text-orange-700 ml-2">
+                    {contact.phone}
                   </a>
                 </p>
               </div>
@@ -38,7 +42,7 @@ export default function SupportTab() {
                 <h3 className="text-lg sm:text-xl mb-4">Quick Links</h3>
                 <div className="space-y-3">
                   <a
-                    href="https://t.me/+9r6mKQuDwtMxNzdi"
+                    href={contact.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full px-4 py-2.5 shadow-md btn-animated text-sm sm:text-base"
@@ -47,7 +51,7 @@ export default function SupportTab() {
                     Telegram Channel
                   </a>
                   <a
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSdhBsAiVDsFjXHKlhsravX7DQwNWafxHgn_vISj7WkMWl7k0w/viewform?usp=dialog"
+                    href={reportBugUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white rounded-full px-4 py-2.5 shadow-md btn-animated text-sm sm:text-base"
@@ -56,7 +60,7 @@ export default function SupportTab() {
                     Report a Bug
                   </a>
                   <a
-                    href="https://docs.google.com/forms/d/17IeZPlwZYqihaaBet6IZVGyDgejLz8R5K9wiWVz8qTc/edit"
+                    href={suggestContentUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full flex items-center justify-center gap-2 bg-purple-500 hover:bg-purple-600 text-white rounded-full px-4 py-2.5 shadow-md btn-animated text-sm sm:text-base"

@@ -7,6 +7,10 @@ import backpackIcon from "../../assets/backpack-icon.png";
 import telegramIcon from "../../assets/telegram-icon.png";
 import bugIcon from "../../assets/bug-icon.png";
 import suggestIcon from "../../assets/suggest-icon.png";
+import { contact, externalLinks, siteConfig } from "../../modules/content";
+
+const reportBugUrl = externalLinks.find((link) => link.label.startsWith("Report"))?.url ?? "#";
+const suggestContentUrl = externalLinks.find((link) => link.label.startsWith("Suggest"))?.url ?? "#";
 
 function imgSrc(img: string | { src: string }): string {
   return typeof img === "string" ? img : img.src;
@@ -69,7 +73,7 @@ export default function DescriptionTab() {
           {/* Primary CTA */}
           <div className="flex justify-center mb-6 sm:mb-8 fade-in-up stagger-3">
             <a
-              href="https://apps.apple.com/app/id6749825722"
+              href={siteConfig.appStoreUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="ios-cta inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg btn-animated btn-cta"
@@ -82,7 +86,7 @@ export default function DescriptionTab() {
           {/* Secondary buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 fade-in-up stagger-4">
             <a
-              href="https://t.me/+9r6mKQuDwtMxNzdi"
+              href={contact.telegram}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full px-5 py-2 shadow-md btn-animated text-sm sm:text-base"
@@ -91,7 +95,7 @@ export default function DescriptionTab() {
               Telegram channel
             </a>
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdhBsAiVDsFjXHKlhsravX7DQwNWafxHgn_vISj7WkMWl7k0w/viewform?usp=dialog"
+              href={reportBugUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white rounded-full px-5 py-2 shadow-md btn-animated text-sm sm:text-base"
@@ -100,7 +104,7 @@ export default function DescriptionTab() {
               Report a bug
             </a>
             <a
-              href="https://docs.google.com/forms/d/17IeZPlwZYqihaaBet6IZVGyDgejLz8R5K9wiWVz8qTc/edit"
+              href={suggestContentUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white rounded-full px-5 py-2 shadow-md btn-animated text-sm sm:text-base"

@@ -1,3 +1,5 @@
+import { contact } from "../../modules/content";
+
 export default function TermsTab() {
   return (
     <div className="bg-white/95 backdrop-blur-sm rounded-3xl overflow-visible card-animated tab-content-enter">
@@ -26,7 +28,7 @@ export default function TermsTab() {
           <p>These terms and conditions are effective as of 2025-08-16.</p>
 
           <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Contact Us</h3>
-          <p>If you have any questions or suggestions about the Terms and Conditions, please do not hesitate to contact the Service Provider at <a href="mailto:georgin2000155@gmail.com" className="text-orange-600 hover:text-orange-700">georgin2000155@gmail.com</a>.</p>
+          <p>If you have any questions or suggestions about the Terms and Conditions, please do not hesitate to contact the Service Provider at <a href={`mailto:${contact.email}`} className="text-orange-600 hover:text-orange-700">{contact.email}</a>.</p>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import { contact } from "../../modules/content";
+
 export default function PrivacyTab() {
   return (
     <div className="bg-white/95 backdrop-blur-sm rounded-3xl overflow-visible card-animated tab-content-enter">
@@ -32,11 +34,11 @@ export default function PrivacyTab() {
           <p>You can stop all collection of information by the Application easily by uninstalling it. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network.</p>
 
           <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Data Retention Policy</h3>
-          <p>The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. If you&apos;d like them to delete User Provided Data that you have provided via the Application, please contact them at <a href="mailto:georgin2000155@gmail.com" className="text-orange-600 hover:text-orange-700">georgin2000155@gmail.com</a> and they will respond in a reasonable time.</p>
+          <p>The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. If you&apos;d like them to delete User Provided Data that you have provided via the Application, please contact them at <a href={`mailto:${contact.email}`} className="text-orange-600 hover:text-orange-700">{contact.email}</a> and they will respond in a reasonable time.</p>
 
           <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Children</h3>
           <p>The Service Provider does not use the Application to knowingly solicit data from or market to children under the age of 13.</p>
-          <p>The Service Provider does not knowingly collect personally identifiable information from children. The Service Provider encourages all children to never submit any personally identifiable information through the Application and/or Services. The Service Provider encourage parents and legal guardians to monitor their children&apos;s Internet usage and to help enforce this Policy by instructing their children never to provide personally identifiable information through the Application and/or Services without their permission. If you have reason to believe that a child has provided personally identifiable information to the Service Provider through the Application and/or Services, please contact the Service Provider (<a href="mailto:georgin2000155@gmail.com" className="text-orange-600 hover:text-orange-700">georgin2000155@gmail.com</a>) so that they will be able to take the necessary actions. You must also be at least 16 years of age to consent to the processing of your personally identifiable information in your country (in some countries we may allow your parent or guardian to do so on your behalf).</p>
+          <p>The Service Provider does not knowingly collect personally identifiable information from children. The Service Provider encourages all children to never submit any personally identifiable information through the Application and/or Services. The Service Provider encourage parents and legal guardians to monitor their children&apos;s Internet usage and to help enforce this Policy by instructing their children never to provide personally identifiable information through the Application and/or Services without their permission. If you have reason to believe that a child has provided personally identifiable information to the Service Provider through the Application and/or Services, please contact the Service Provider (<a href={`mailto:${contact.email}`} className="text-orange-600 hover:text-orange-700">{contact.email}</a>) so that they will be able to take the necessary actions. You must also be at least 16 years of age to consent to the processing of your personally identifiable information in your country (in some countries we may allow your parent or guardian to do so on your behalf).</p>
 
           <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Security</h3>
           <p>The Service Provider is concerned about safeguarding the confidentiality of your information. The Service Provider provides physical, electronic, and procedural safeguards to protect information the Service Provider processes and maintains.</p>
@@ -49,7 +51,7 @@ export default function PrivacyTab() {
           <p>By using the Application, you are consenting to the processing of your information as set forth in this Privacy Policy now and as amended by us.</p>
 
           <h3 className="text-2xl lg:text-3xl font-bold text-center tracking-tight mt-12 mb-4">Contact Us</h3>
-          <p>If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at <a href="mailto:georgin2000155@gmail.com" className="text-orange-600 hover:text-orange-700">georgin2000155@gmail.com</a>.</p>
+          <p>If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at <a href={`mailto:${contact.email}`} className="text-orange-600 hover:text-orange-700">{contact.email}</a>.</p>
         </div>
       </div>
     </div>

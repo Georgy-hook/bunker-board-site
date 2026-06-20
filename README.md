@@ -14,7 +14,7 @@
 ## Назначение сайта
 
 - **Презентация игры** — описание и ссылка на App Store.
-- **Tips & Tricks** — советы и стратегии для игроков.
+- **Tips & Tricks** — локализованные советы и стратегии для игроков (`/tips/`, `/en/tips/`) с переключателем языка.
 - **Deep Links** — страницы `/join` и `/create` для Universal Links/App Links; при отсутствии приложения пользователь видит fallback-страницу.
 - **Юридическая информация** — Privacy Policy и Terms of Service (табы на главной).
 - **Поддержка** — Telegram-канал, форма багов, предложения контента.
@@ -54,7 +54,8 @@ src/
 ├── components/
 │   ├── Header.astro     # Шапка с навигацией
 │   ├── Footer.astro     # Подвал
-│   ├── islands/         # React-компоненты (client:load)
+│   ├── TipsPage.astro   # Общий renderer локализованных tips-страниц
+│   ├── islands/         # React-компоненты для Astro islands
 │   │   ├── TabsSection.tsx
 │   │   ├── DescriptionTab.tsx
 │   │   ├── PrivacyTab.tsx
@@ -64,10 +65,12 @@ src/
 ├── layouts/
 │   └── BaseLayout.astro # Общий layout (SEO, OG, theme)
 ├── modules/
-│   └── content/         # Типы и данные сайта (siteConfig, contact, links)
+│   └── content/         # Типы и данные сайта (siteConfig, contact, links, tips)
 ├── pages/
 │   ├── index.astro      # Главная страница
-│   ├── tips.astro       # Tips & Tricks
+│   ├── tips.astro       # Tips & Tricks — RU
+│   ├── en/
+│   │   └── tips.astro   # Tips & Tricks — EN
 │   ├── join.astro       # Deep link — присоединиться к сессии
 │   └── create.astro     # Deep link — создать сессию
 └── styles/

@@ -1,8 +1,6 @@
 import type { TipsLocale, TipsPageContent } from '../types';
 import { siteConfig } from './site';
 
-export const defaultTipsLocale: TipsLocale = 'ru';
-
 export const tipsContentByLocale = {
   ru: {
     locale: 'ru',
@@ -12,7 +10,7 @@ export const tipsContentByLocale = {
     description:
       'Экспертные стратегии, тактики и советы для победы в настольной игре Бункер. Узнайте, как убеждать, строить альянсы и выживать в апокалипсисе.',
     headline: 'Стратегии и советы для настольной игры «Бункер»',
-    canonicalUrl: 'https://vaultgame.app/tips',
+    canonicalUrl: 'https://vaultgame.app/tips/',
     keywords:
       'бункер настольная игра, стратегии бункер, советы бункер, как играть в бункер, тактика бункер, настольная игра выживание',
     ogImage: '/og-tips.png',
@@ -298,7 +296,7 @@ export const tipsContentByLocale = {
     description:
       'Expert strategies, tactics, and tips for winning the board game Bunker. Learn how to persuade, build alliances, and survive the apocalypse.',
     headline: 'Strategies and Tips for the Board Game Bunker',
-    canonicalUrl: 'https://vaultgame.app/en/tips',
+    canonicalUrl: 'https://vaultgame.app/en/tips/',
     keywords:
       'bunker board game, bunker strategy, bunker tips, how to play bunker, bunker tactics, survival board game',
     ogImage: '/og-tips.png',

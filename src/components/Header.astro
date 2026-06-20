@@ -1,6 +1,7 @@
 ---
 import houseIcon from '../assets/114ebae2afe3a8a82f1ffeca9290fb1759e0ab3a.png';
 import iosIcon from '../assets/ios-icon-logo.png';
+import { siteConfig } from '../modules/content';
 
 type HeaderLocale = 'en' | 'ru';
 
@@ -30,7 +31,7 @@ const labels: Record<HeaderLocale, {
   en: {
     houseAlt: 'Vault House',
     tips: 'Tips',
-    tipsHref: '/en/tips',
+    tipsHref: '/en/tips/',
     languageSwitcher: 'Choose language',
     appStore: 'Download on iOS',
     appStoreShort: 'iOS',
@@ -39,7 +40,7 @@ const labels: Record<HeaderLocale, {
   ru: {
     houseAlt: 'Дом Vault',
     tips: 'Советы',
-    tipsHref: '/tips',
+    tipsHref: '/tips/',
     languageSwitcher: 'Выбрать язык',
     appStore: 'Скачать на iOS',
     appStoreShort: 'iOS',
@@ -94,7 +95,7 @@ const copy = labels[locale];
         </div>
       )}
       <a
-        href="https://apps.apple.com/app/id6749825722"
+        href={siteConfig.appStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
         class="app-badge hidden sm:flex items-center gap-2 text-base lg:text-lg px-4 lg:px-6 py-2.5 lg:py-3 bg-black text-white hover:bg-gray-800 shadow-lg btn-animated rounded-md font-medium flex-shrink-0"
@@ -103,7 +104,7 @@ const copy = labels[locale];
         {copy.appStore}
       </a>
       <a
-        href="https://apps.apple.com/app/id6749825722"
+        href={siteConfig.appStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
         class="app-badge flex sm:hidden items-center gap-1 text-xs px-2 py-2 bg-black text-white hover:bg-gray-800 shadow-lg btn-animated rounded-md font-medium flex-shrink-0"

@@ -1,4 +1,6 @@
 ---
+import { siteConfig } from '../modules/content';
+
 type FooterLocale = 'en' | 'ru';
 
 interface Props {
@@ -8,7 +10,7 @@ interface Props {
 const { locale = 'en' } = Astro.props;
 
 const copyrightByLocale: Record<FooterLocale, string> = {
-  en: '© 2025 Vault. Pavlina Gluhova. All rights reserved.',
+  en: siteConfig.copyright,
   ru: '© 2025 Vault. Pavlina Gluhova. Все права защищены.',
 };
 ---

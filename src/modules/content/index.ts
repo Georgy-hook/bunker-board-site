@@ -1,5 +1,5 @@
 export { siteConfig, contact, externalLinks } from './data/site';
-export { defaultTipsLocale, tipsContentByLocale } from './data/tips';
+export { tipsContentByLocale } from './data/tips';
 export type {
   PageMeta,
   LegalSection,
